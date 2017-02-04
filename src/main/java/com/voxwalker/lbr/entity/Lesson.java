@@ -1,5 +1,6 @@
 package com.voxwalker.lbr.entity;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -13,10 +14,16 @@ public class Lesson {
 	private Long id;
 	
 	private String name;
-	private String text;
-	private String url;
-	private int start;
-	private int end;
+	private String content;
+	
+	@Column(name="audio_url")
+	private String audioUrl;
+	
+	@Column(name="audio_start")
+	private int audioStart;
+	
+	@Column(name="audio_end")
+	private int audioEnd;
 	
 	@ManyToOne
 	@JoinColumn(name="course_id")
@@ -44,30 +51,34 @@ public class Lesson {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public String getText() {
-		return text;
+
+
+	public String getContent() {
+		return content;
 	}
-	public void setText(String text) {
-		this.text = text;
+	public void setContent(String content) {
+		this.content = content;
 	}
-	public String getUrl() {
-		return url;
+	public String getAudioUrl() {
+		return audioUrl;
 	}
-	public void setUrl(String url) {
-		this.url = url;
+	public void setAudioUrl(String audioUrl) {
+		this.audioUrl = audioUrl;
 	}
-	public int getStart() {
-		return start;
+	public int getAudioStart() {
+		return audioStart;
 	}
-	public void setStart(int start) {
-		this.start = start;
+	public void setAudioStart(int audioStart) {
+		this.audioStart = audioStart;
 	}
-	public int getEnd() {
-		return end;
+	public int getAudioEnd() {
+		return audioEnd;
 	}
-	public void setEnd(int end) {
-		this.end = end;
+	public void setAudioEnd(int audioEnd) {
+		this.audioEnd = audioEnd;
 	}
+	
+	
 	
 	
 	
