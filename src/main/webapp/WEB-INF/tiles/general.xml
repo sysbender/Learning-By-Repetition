@@ -10,11 +10,13 @@
 	<definition name="index" extends="common">
 		<put-attribute name="title" value="Learning By Repetition" />
 		<put-attribute name="body" value="/WEB-INF/jsp/index.jsp" />
+		<put-attribute name="current" value="index"/>
 	</definition>
 	
 		<definition name="users" extends="common">
 		<put-attribute name="title" value="List all users" />
 		<put-attribute name="body" value="/WEB-INF/jsp/users.jsp" />
+		<put-attribute name="current" value="users"/>
 	</definition>
 	
 	

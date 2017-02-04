@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles"%>
 
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -43,6 +44,9 @@
 </head>
 <body>
 
+<%@ taglib prefix="tilesx" uri="http://tiles.apache.org/tags-tiles-extras" %>
+<tilesx:useAttribute name="current" />
+
 	<div class="container">
 
 		<!-- Static navbar -->
@@ -68,8 +72,8 @@
 						<!-- ******** menu list ******* -->
 
 
-						<li><a href='<spring:url value="/"/>'>Home</a></li>
-						<li><a href='<spring:url value="/users.html"/>'>Users</a></li>
+						<li class="${current =='index' ? 'active' : '' }"><a href='<spring:url value="/"/>'>Home</a></li>
+						<li class="${current =='users' ? 'active' : '' }"><a href='<spring:url value="/users.html"/>'>Users</a></li>
 						<li><a href='#'>Login</a></li>
 						<li><a href='#'>Logout</a></li>
 
