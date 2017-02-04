@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<jsp:include page="/WEB-INF/tiles/taglib.jsp" />
+
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 
 <table class="table table-bordered table-hover table-striped">
 	<thead>
@@ -14,7 +15,8 @@
 	<tbody>
 		<c:forEach var="user" items="${users}">
 			<tr>
-				<td><c:out value="${user.name}" /></td>
+				<td> <a href='<spring:url value="/users/${user.id}.html"/>'> ${user.name } </a>				
+				</td>
 			</tr>
 		</c:forEach>
 	</tbody>
