@@ -18,6 +18,7 @@ public class Course {
 	private String name;
 	private String desc;
 	private String lang;
+	private int share; // 0-private, 1-public
 	
 	@ManyToOne
 	@JoinColumn( name="user_id")
@@ -26,6 +27,7 @@ public class Course {
 	@OneToMany(mappedBy="course")
 	private List<Lesson> lessons;
 	
+
 	
 	
 	

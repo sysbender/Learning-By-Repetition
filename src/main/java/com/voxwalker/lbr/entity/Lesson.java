@@ -1,11 +1,14 @@
 package com.voxwalker.lbr.entity;
 
-import javax.persistence.Column;
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+
 
 @Entity
 public class Lesson {
@@ -13,12 +16,16 @@ public class Lesson {
 	@GeneratedValue
 	private Long id;
 	
-	private String name;
-	
 	@ManyToOne
 	@JoinColumn(name="course_id")
 	private Course course;
 	
+	@OneToMany(mappedBy="lesson")
+	private List<Upload> upload;
+	
+	
+	private String name;
+
 	
 	
 	private String text1;
@@ -31,6 +38,11 @@ public class Lesson {
 	private String audio2;
 	private int start2;
 	private int end2;
+	
+	
+	
+	
+	
 	public Long getId() {
 		return id;
 	}
@@ -96,6 +108,12 @@ public class Lesson {
 	}
 	public void setEnd2(int end2) {
 		this.end2 = end2;
+	}
+	public List<Upload> getUpload() {
+		return upload;
+	}
+	public void setUpload(List<Upload> upload) {
+		this.upload = upload;
 	}
 	
 	// getter and setter

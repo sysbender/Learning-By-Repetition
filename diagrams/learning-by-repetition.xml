@@ -4,7 +4,29 @@
 		<entity-width>120</entity-width>
 		<entity-height>206</entity-height>
 		<entity-X-Coordinate>88</entity-X-Coordinate>
-		<entity-Y-Coordinate>76</entity-Y-Coordinate>
+		<entity-Y-Coordinate>20</entity-Y-Coordinate>
+		<primary-collapsed>false</primary-collapsed>
+		<relation-collapsed>false</relation-collapsed>
+		<basic-collapsed>false</basic-collapsed>
+	</entity>
+
+	<entity>
+		<entity-name>com.voxwalker.lbr.entity.Lesson</entity-name>
+		<entity-width>120</entity-width>
+		<entity-height>326</entity-height>
+		<entity-X-Coordinate>686</entity-X-Coordinate>
+		<entity-Y-Coordinate>27</entity-Y-Coordinate>
+		<primary-collapsed>false</primary-collapsed>
+		<relation-collapsed>false</relation-collapsed>
+		<basic-collapsed>false</basic-collapsed>
+	</entity>
+
+	<entity>
+		<entity-name>com.voxwalker.lbr.entity.Course</entity-name>
+		<entity-width>120</entity-width>
+		<entity-height>226</entity-height>
+		<entity-X-Coordinate>355</entity-X-Coordinate>
+		<entity-Y-Coordinate>20</entity-Y-Coordinate>
 		<primary-collapsed>false</primary-collapsed>
 		<relation-collapsed>false</relation-collapsed>
 		<basic-collapsed>false</basic-collapsed>
@@ -15,29 +37,18 @@
 		<entity-width>120</entity-width>
 		<entity-height>146</entity-height>
 		<entity-X-Coordinate>88</entity-X-Coordinate>
-		<entity-Y-Coordinate>350</entity-Y-Coordinate>
+		<entity-Y-Coordinate>300</entity-Y-Coordinate>
 		<primary-collapsed>false</primary-collapsed>
 		<relation-collapsed>false</relation-collapsed>
 		<basic-collapsed>false</basic-collapsed>
 	</entity>
 
 	<entity>
-		<entity-name>com.voxwalker.lbr.entity.Lesson</entity-name>
+		<entity-name>com.voxwalker.lbr.entity.Upload</entity-name>
 		<entity-width>120</entity-width>
-		<entity-height>226</entity-height>
-		<entity-X-Coordinate>720</entity-X-Coordinate>
-		<entity-Y-Coordinate>66</entity-Y-Coordinate>
-		<primary-collapsed>false</primary-collapsed>
-		<relation-collapsed>false</relation-collapsed>
-		<basic-collapsed>false</basic-collapsed>
-	</entity>
-
-	<entity>
-		<entity-name>com.voxwalker.lbr.entity.Course</entity-name>
-		<entity-width>120</entity-width>
-		<entity-height>206</entity-height>
-		<entity-X-Coordinate>428</entity-X-Coordinate>
-		<entity-Y-Coordinate>70</entity-Y-Coordinate>
+		<entity-height>186</entity-height>
+		<entity-X-Coordinate>355</entity-X-Coordinate>
+		<entity-Y-Coordinate>299</entity-Y-Coordinate>
 		<primary-collapsed>false</primary-collapsed>
 		<relation-collapsed>false</relation-collapsed>
 		<basic-collapsed>false</basic-collapsed>
