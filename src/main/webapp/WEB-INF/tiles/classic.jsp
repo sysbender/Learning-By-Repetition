@@ -67,10 +67,11 @@
 					<ul class="nav navbar-nav">
 						<!-- ******** menu list ******* -->
 
-						<li><a href="#">Home</a></li>
-						<li><a href="#">Users</a></li>
-						<li><a href="#">Login</a></li>
-						<li><a href="#">Logout</a></li>
+
+						<li><a href='<spring:url value="/"/>'>Home</a></li>
+						<li><a href='<spring:url value="/users.html"/>'>Users</a></li>
+						<li><a href='#'>Login</a></li>
+						<li><a href='#'>Logout</a></li>
 
 					</ul>
 
