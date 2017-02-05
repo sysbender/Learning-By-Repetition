@@ -3,33 +3,31 @@
 
 <%@ include file="../tiles/taglib.jsp"%>
 
-<h2>${user.name}</h2>
-<c:forEach var="course" items="${user.courses }">
-	<h1>${course.name }</h1>
-	<p>${course.desc }</p>
+<h2>imports of ${user.name}</h2>
 
-	<table class="table table-bordered">
-		<thead>
+
+<table class="table table-bordered">
+	<thead>
+		<tr>
+			<th>course name</th>
+			<th>course description</th>
+			<th>course language</th>
+		</tr>
+	</thead>
+
+	<tbody>
+		<c:forEach var="course" items="${user.courses }">
+
 			<tr>
-				<th>lesson name</th>
-				<th>lesson text</th>
+				<td>${course.name }</td>
+				<td>${course.desc }</td>
+				<td>${course.lang }</td>
 			</tr>
-		</thead>
 
-		<tbody>
-			<c:forEach var="lesson" items="${course.lessons }">
-
-				<tr>
-					<td>${lesson.name }</td>
-
-					<td>${lesson.text1 }</td> 
-				</tr>
-
-			</c:forEach>
+		</c:forEach>
 
 
-		</tbody>
+	</tbody>
 
-	</table>
+</table>
 
-</c:forEach>

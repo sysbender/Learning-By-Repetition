@@ -74,7 +74,7 @@ public class InitDbService {
 		Course course2 = new Course(); 
 		course2.setName("French Course 2");
 		course2.setLang("Fr");
-		course2.setUser(userGuest);
+		course2.setUser(userAdmin);
 		course2.setDesc("this is French course 2");
 		courseRepository.save(course2);
 		
