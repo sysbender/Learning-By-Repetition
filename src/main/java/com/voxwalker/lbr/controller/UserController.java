@@ -12,7 +12,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.voxwalker.lbr.entity.Course;
 import com.voxwalker.lbr.entity.User;
+import com.voxwalker.lbr.service.CourseService;
 import com.voxwalker.lbr.service.UserService;
 
 @Controller
@@ -21,11 +23,22 @@ public class UserController {
 	@Autowired
 	private UserService userService;
 	
+	@Autowired
+	private CourseService courseService;
+	
+	
 	// bind form 
 	@ModelAttribute("user")
 	private User construct(){
 		return new User();
 	}
+	
+	
+	@ModelAttribute("course")
+	private Course constructCourse(){
+		return new Course();
+	}
+	
 	
 	@RequestMapping("/users")
 	public String users(Model model){
@@ -60,4 +73,21 @@ public class UserController {
 		model.addAttribute("user",userService.findOneWithCourses(name));
 		return "user-detail";
 	}
+	
+	@RequestMapping("/imports")
+	public String imports(Model model, Principal principal){
+		String name = principal.getName();
+		model.addAttribute("user",userService.findOneWithCourses(name));
+		return "imports";
+	}
+	
+	
+	@RequestMapping(value="/imports", method=RequestMethod.POST)
+	public String doAddImport(@ModelAttribute("course") Course course, Principal principal){
+		String name = principal.getName();
+		courseService.save(course, name);
+		return "redirect:/imports.html";
+		
+	}
+	
 }
