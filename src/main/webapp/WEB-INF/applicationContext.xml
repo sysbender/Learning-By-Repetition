@@ -48,4 +48,7 @@
 	
 	<!-- *******Data JPA***** -->	
 	<jpa:repositories base-package="com.voxwalker.lbr.repository"/>
+	
+	<!--  *******  include security.xml***** -->
+	<import resource="security.xml"/>
 </beans>
