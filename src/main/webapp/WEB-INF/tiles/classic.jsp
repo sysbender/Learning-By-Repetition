@@ -44,16 +44,17 @@
 </head>
 <body>
 
-<%@ taglib prefix="tilesx" uri="http://tiles.apache.org/tags-tiles-extras" %>
-<tilesx:useAttribute name="current" />
+	<%@ taglib prefix="tilesx"
+		uri="http://tiles.apache.org/tags-tiles-extras"%>
+	<tilesx:useAttribute name="current" />
 
 	<div class="container">
 
 		<!-- Static navbar -->
 		<nav class="navbar navbar-default">
 			<div class="container-fluid">
-			
-			<!--  logo  -->
+
+				<!--  logo  -->
 				<div class="navbar-header">
 					<button type="button" class="navbar-toggle collapsed"
 						data-toggle="collapse" data-target="#navbar" aria-expanded="false"
@@ -64,21 +65,39 @@
 					</button>
 					<a class="navbar-brand" href="<spring:url value="/"/>">LBR</a>
 				</div>
-				
-				
+
+
 				<!--  menu in top -->
 				<div id="navbar" class="navbar-collapse collapse">
 					<ul class="nav navbar-nav">
 						<!-- ******** menu list ******* -->
 
 
-						<li class="${current =='index' ? 'active' : '' }"><a href='<spring:url value="/"/>'>Home</a></li>
-						<li class="${current =='users' ? 'active' : '' }"><a href='<spring:url value="/users.html"/>'>Users</a></li>
-						<li class="${current =='register' ? 'active' : '' }"><a href='<spring:url value="/register.html"/>'>Register</a></li>
-						<li><a href='#'>Imports</a></li>
-						<li class="${current =='login' ? 'active' : '' }"><a href='<spring:url value="/login.html"/>'>Login</a></li>
-						<li><a href='<spring:url value="/logout"/>'>Logout</a></li>
+						<li class="${current =='index' ? 'active' : '' }"><a
+							href='<spring:url value="/"/>'>Home</a></li>
 
+
+
+						<security:authorize access=" hasRole('ROLE_ADMIN')">
+							<li class="${current =='users' ? 'active' : '' }"><a
+								href='<spring:url value="/users.html"/>'>Users</a></li>
+						</security:authorize>
+
+
+						<li class="${current =='register' ? 'active' : '' }"><a
+							href='<spring:url value="/register.html"/>'>Register</a></li>
+						<li><a href='#'>Imports</a></li>
+
+
+
+						<security:authorize access=" ! isAuthenticated()">
+							<li class="${current =='login' ? 'active' : '' }"><a
+								href='<spring:url value="/login.html"/>'>Login</a></li>
+
+						</security:authorize>
+						<security:authorize access="isAuthenticated()">
+							<li><a href='<spring:url value="/logout"/>'>Logout</a></li>
+						</security:authorize>
 					</ul>
 
 				</div>
@@ -90,12 +109,12 @@
 
 		<!--  **********body*********** -->
 		<tiles:insertAttribute name="body" />
-		
-		
+
+
 		<br> <br>
-		
-		
-		<!--  **********footer*********** -->		
+
+
+		<!--  **********footer*********** -->
 		<div class="text-center">
 			<tiles:insertAttribute name="footer" />
 		</div>
