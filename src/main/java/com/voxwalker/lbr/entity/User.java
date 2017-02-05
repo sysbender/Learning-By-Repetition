@@ -20,6 +20,7 @@ public class User {
 	private String name;
 	private String email;
 	private String password;
+	private boolean enabled;
 	
 	@ManyToMany
 	@JoinTable
@@ -75,6 +76,14 @@ public class User {
 
 	public void setCourses(List<Course> courses) {
 		this.courses = courses;
+	}
+
+	public boolean isEnabled() {
+		return enabled;
+	}
+
+	public void setEnabled(boolean enabled) {
+		this.enabled = enabled;
 	}
 	
 	

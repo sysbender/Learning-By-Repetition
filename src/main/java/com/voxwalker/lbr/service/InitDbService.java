@@ -6,6 +6,7 @@ import javax.annotation.PostConstruct;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.voxwalker.lbr.entity.Course;
@@ -50,13 +51,16 @@ public class InitDbService {
 		// add users
 		User userAdmin = new User();
 		userAdmin.setName("admin");
-		userAdmin.setPassword("admin");
+		userAdmin.setEnabled(true);
+		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+		userAdmin.setPassword(encoder.encode("admin"));
 		userAdmin.setRoles( Arrays.asList( new Role[]{roleUser, roleAdmin}));
 		userRepository.save(userAdmin);
 		
 		User userGuest = new User();
 		userGuest.setName("guest");
-		userGuest.setPassword("guest");
+		userGuest.setEnabled(true);
+		userGuest.setPassword(encoder.encode("guest"));
 		userGuest.setRoles( Arrays.asList( new Role[]{roleUser}));
 		userRepository.save(userGuest);
 		
