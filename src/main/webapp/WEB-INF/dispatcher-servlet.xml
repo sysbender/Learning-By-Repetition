@@ -31,4 +31,7 @@
 	
 	<!-- ******hibernate validator****** -->
 	<mvc:annotation-driven></mvc:annotation-driven>
+	
+	<!--  ***** static resource **** -->
+	<mvc:resources location="/resource/**" mapping="/resource/"/>
 </beans>

@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+
+
+<%@ include file="../tiles/taglib.jsp"%>
+
 <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles"%>
 
 
@@ -77,35 +81,65 @@
 							href='<spring:url value="/"/>'>Home</a></li>
 
 
+						<!-- ******** menu for admin   *********** -->
 
 						<security:authorize access=" hasRole('ROLE_ADMIN')">
 							<li class="${current =='users' ? 'active' : '' }"><a
 								href='<spring:url value="/users.html"/>'>Users</a></li>
 						</security:authorize>
 
-
-						<li class="${current =='register' ? 'active' : '' }"><a
-							href='<spring:url value="/register.html"/>'>Register</a></li>
-
-
+						<!-- ******** menu for login user   *********** -->
 						<security:authorize access="isAuthenticated()">
 							<li class="${current =='account' ? 'active' : '' }"><a
 								href='<spring:url value="/account.html"/>'>My Account</a></li>
-								
+
 							<li class="${current =='import' ? 'active' : '' }"><a
 								href='<spring:url value="/import.html"/>'>Import</a></li>
+
 						</security:authorize>
+					</ul>
 
 
+					<ul class="nav navbar-nav navbar-right">
+
+						<!-- ******** menu for guest  *********** -->
 						<security:authorize access=" ! isAuthenticated()">
+							<li class="${current =='register' ? 'active' : '' }"><a
+								href='<spring:url value="/register.html"/>'>Register</a></li>
+
 							<li class="${current =='login' ? 'active' : '' }"><a
 								href='<spring:url value="/login.html"/>'>Login</a></li>
 						</security:authorize>
 
+						<!-- ******** menu for login user   *********** -->
 						<security:authorize access="isAuthenticated()">
 							<li><a href='<spring:url value="/logout"/>'>Logout</a></li>
 						</security:authorize>
+
+
+
+						<c:if test="${sessionScope.target_lang == null }">
+							<c:set var="target_lang" value="en" scope="session" />
+						</c:if>
+
+						<li class="dropdown"><a href="#" class="dropdown-toggle"
+							data-toggle="dropdown" role="button" aria-haspopup="true"
+							aria-expanded="false">learn <img
+								src='<spring:url value="/resource/img/${target_lang}.png"/>' />
+								${target_lang} <span class="caret"></span>
+						</a>
+							<ul class="dropdown-menu">
+								<li><a href='<spring:url value="/index/en.html"/>'>learn  <img
+										src='<spring:url value="/resource/img/en.png"/>' /> en
+								</a></li>
+								<li><a href='<spring:url value="/index/fr.html"/>'>learn  <img
+										src='<spring:url value="/resource/img/fr.png"/>' /> fr
+								</a></li>
+							</ul></li>
 					</ul>
+
+
+
 
 				</div>
 				<!--/.nav-collapse -->

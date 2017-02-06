@@ -8,6 +8,8 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.voxwalker.lbr.entity.User;
 import com.voxwalker.lbr.service.UserService;
@@ -27,11 +29,13 @@ public class RegisterController {
 	}
 
 	
+	// show user registration form
 	@RequestMapping
 	public String showRegister() {
 		return "user-register";
 	}
 
+	// register user
 	@RequestMapping( method = RequestMethod.POST)
 	public String doRegister(@Valid @ModelAttribute("user") User user,
 			BindingResult result) {
@@ -40,5 +44,15 @@ public class RegisterController {
 		}
 		userService.save(user);
 		return "redirect:/register.html?success=true";
+	}
+	
+	
+	// check if username is available
+	@RequestMapping("/available")
+	@ResponseBody
+	public String available(@RequestParam String username){
+		Boolean available= userService.findOne(username) == null ;
+		return available.toString();
+		
 	}
 }
