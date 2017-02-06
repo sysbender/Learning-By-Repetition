@@ -45,6 +45,7 @@
 						<label for="name" class="col-sm-2" control-label>name:</label>
 						<div class="col-sm-10">
 							<form:input path="name" cssClass="form-control" />
+							<form:errors path="name"/>
 						</div>
 					</div>
 

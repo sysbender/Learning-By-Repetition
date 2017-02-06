@@ -9,6 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.Size;
 
 @Entity
 public class Course {
@@ -16,8 +17,13 @@ public class Course {
 	@GeneratedValue
 	private Long id;
 	
+	@Size(min=3, message="Name : min size 3")
 	private String name;
+	
+	
 	private String desc;
+	
+	
 	private String lang;
 	private int share; // 0-private, 1-public
 	

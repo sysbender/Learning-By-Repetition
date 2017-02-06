@@ -8,6 +8,9 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.URL;
 
 
 @Entity
@@ -23,18 +26,20 @@ public class Lesson {
 	@OneToMany(mappedBy="lesson")
 	private List<Upload> upload;
 	
-	
+	@Size(min=3, message="Name : min size 3")
 	private String name;
 
 	
 	
 	private String text1;
+	@URL
 	private String audio1;
 	private int start1;
 	private int end1;
 	
 	
 	private String text2;
+	@URL
 	private String audio2;
 	private int start2;
 	private int end2;
