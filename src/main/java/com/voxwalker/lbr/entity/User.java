@@ -3,6 +3,7 @@ package com.voxwalker.lbr.entity;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -14,6 +15,8 @@ import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.Email;
 
+import com.voxwalker.lbr.annotation.UniqueUsername;
+
 @Entity
 public class User {
 
@@ -22,10 +25,13 @@ public class User {
 	private Long id;
 	
 	@Size(min=3, message="Name : min size 3")
+	@Column(unique=true)
+	@UniqueUsername(message="such user name already exist")
 	private String name;
 	
 	@Email
 	@Size(min=3, message="Name : min size 3")
+	@Column(unique=true)
 	private String email;
 	
 	@Size(min=3, message="Name : min size 3")
