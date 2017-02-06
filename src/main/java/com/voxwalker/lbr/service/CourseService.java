@@ -1,6 +1,8 @@
 package com.voxwalker.lbr.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.method.P;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 
 import com.voxwalker.lbr.entity.Course;
@@ -26,9 +28,16 @@ public class CourseService {
 	}
 
 
-	public void delete(Long id) {
-		courseRepository.delete(id);
+	@PreAuthorize("#course.user.name == authentication.name or hasRole('ROLE_ADMIN')")
+	public void delete(@P("course")Course course) {
+		courseRepository.delete(course);
 		
+	}
+
+
+	public Course findOne(Long id) {
+		 
+		return courseRepository.findOne(id);
 	}
 
 }

@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.voxwalker.lbr.entity.Course;
 import com.voxwalker.lbr.entity.User;
+import com.voxwalker.lbr.repository.CourseRepository;
 import com.voxwalker.lbr.service.CourseService;
 import com.voxwalker.lbr.service.UserService;
 
@@ -92,7 +93,8 @@ public class UserController {
 	
 	@RequestMapping("/import/remove/{id}")
 	public String removeImport(@PathVariable Long id){
-		courseService.delete(id);
+		Course course =  courseService.findOne(id);
+		courseService.delete(course);
 		return "redirect:/import.html";
 	}
 	
