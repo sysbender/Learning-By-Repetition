@@ -6,12 +6,29 @@
 
 <Script type="text/javascript">
 	$(document).ready(function() {
-		
+		//alert for removing
 		$(".triggerRemove").click(function(e) {
 			e.preventDefault(); // do not run link
 			$("#modalRemove .removeBtn").attr("href", $(this).attr("href"));
 			$("#modalRemove").modal();
 		});
+		// jquery validator
+		$(".courseForm").validate({
+			rules : {
+				name : {
+					required : true,
+					minlength : 3
+				}
+		
+			},
+			highlight:function(element){
+				$(element).closest('.form-group').removeClass('has-success').addClass('has-error');
+			},
+			unhighlight:function(element){
+				$(element).closest('.form-group').removeClass('has-error').addClass('has-success');
+			}
+		});
+		
 		
 	});
 </Script>
@@ -23,7 +40,7 @@
 <button type="button" class="btn btn-primary btn-lg" data-toggle="modal"
 	data-target="#myModal">New Course</button>
 
-<form:form commandName="course" cssClass="form-horizontal">
+<form:form commandName="course" cssClass="form-horizontal courseForm">
 
 	<!-- Modal -->
 	<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
@@ -124,3 +141,4 @@
 		</div>
 	</div>
 </div>
+
