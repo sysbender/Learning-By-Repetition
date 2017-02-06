@@ -74,20 +74,31 @@ public class UserController {
 		return "user-detail";
 	}
 	
-	@RequestMapping("/imports")
+	@RequestMapping("/import")
 	public String imports(Model model, Principal principal){
 		String name = principal.getName();
 		model.addAttribute("user",userService.findOneWithCourses(name));
-		return "imports";
+		return "import";
 	}
 	
 	
-	@RequestMapping(value="/imports", method=RequestMethod.POST)
+	@RequestMapping(value="/import", method=RequestMethod.POST)
 	public String doAddImport(@ModelAttribute("course") Course course, Principal principal){
 		String name = principal.getName();
 		courseService.save(course, name);
-		return "redirect:/imports.html";
+		return "redirect:/import.html";
 		
 	}
 	
+	@RequestMapping("/import/remove/{id}")
+	public String removeImport(@PathVariable Long id){
+		courseService.delete(id);
+		return "redirect:/import.html";
+	}
+	
+	@RequestMapping("/users/remove/{id}")
+	public String removeUser(@PathVariable Long id){
+		userService.delete(id);
+		return "redirect:/users.html";
+	}
 }

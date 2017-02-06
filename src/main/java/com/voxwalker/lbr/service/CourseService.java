@@ -25,4 +25,10 @@ public class CourseService {
 		
 	}
 
+
+	public void delete(Long id) {
+		courseRepository.delete(id);
+		
+	}
+
 }

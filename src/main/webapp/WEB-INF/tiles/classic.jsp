@@ -92,8 +92,8 @@
 							<li class="${current =='account' ? 'active' : '' }"><a
 								href='<spring:url value="/account.html"/>'>My Account</a></li>
 								
-							<li class="${current =='imports' ? 'active' : '' }"><a
-								href='<spring:url value="/imports.html"/>'>Imports</a></li>
+							<li class="${current =='import' ? 'active' : '' }"><a
+								href='<spring:url value="/import.html"/>'>Import</a></li>
 						</security:authorize>
 
 

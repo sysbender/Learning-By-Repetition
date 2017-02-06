@@ -63,4 +63,9 @@ public class UserService {
 		return findOneWithCourses(user.getId());
 	}
 
+	public void delete(Long id) {
+		userRepository.delete(id);
+		
+	}
+
 }
