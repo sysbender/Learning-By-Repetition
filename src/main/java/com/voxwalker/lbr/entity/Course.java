@@ -75,6 +75,12 @@ public class Course {
 	public void setLang(String lang) {
 		this.lang = lang;
 	}
+	public int getShare() {
+		return share;
+	}
+	public void setShare(int share) {
+		this.share = share;
+	}
 	
 	
 	

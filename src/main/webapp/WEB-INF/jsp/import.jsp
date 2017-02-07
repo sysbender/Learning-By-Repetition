@@ -5,32 +5,37 @@
 
 
 <Script type="text/javascript">
-	$(document).ready(function() {
-		//alert for removing
-		$(".triggerRemove").click(function(e) {
-			e.preventDefault(); // do not run link
-			$("#modalRemove .removeBtn").attr("href", $(this).attr("href"));
-			$("#modalRemove").modal();
-		});
-		// jquery validator
-		$(".courseForm").validate({
-			rules : {
-				name : {
-					required : true,
-					minlength : 3
-				}
-		
-			},
-			highlight:function(element){
-				$(element).closest('.form-group').removeClass('has-success').addClass('has-error');
-			},
-			unhighlight:function(element){
-				$(element).closest('.form-group').removeClass('has-error').addClass('has-success');
-			}
-		});
-		
-		
-	});
+	$(document).ready(
+			function() {
+				//alert for removing
+				$(".triggerRemove").click(
+						function(e) {
+							e.preventDefault(); // do not run link
+							$("#modalRemove .removeBtn").attr("href",
+									$(this).attr("href"));
+							$("#modalRemove").modal();
+						});
+				// jquery validator
+				$(".courseForm").validate(
+						{
+							rules : {
+								name : {
+									required : true,
+									minlength : 3
+								}
+
+							},
+							highlight : function(element) {
+								$(element).closest('.form-group').removeClass(
+										'has-success').addClass('has-error');
+							},
+							unhighlight : function(element) {
+								$(element).closest('.form-group').removeClass(
+										'has-error').addClass('has-success');
+							}
+						});
+
+			});
 </Script>
 
 
@@ -62,7 +67,22 @@
 						<label for="name" class="col-sm-2" control-label>name:</label>
 						<div class="col-sm-10">
 							<form:input path="name" cssClass="form-control" />
-							<form:errors path="name"/>
+							<form:errors path="name" />
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label for="lang" class="col-sm-2" control-label>language:</label>
+						<div class="col-sm-10">
+							<form:input   path="lang"   cssClass="form-control"  disabled="true" />
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label for="share" class="col-sm-2" control-label>share:</label>
+						<div class="col-sm-10">			
+							<form:radiobutton path="share" value="-1" />Private 
+							<form:radiobutton path="share" value="0" />Public
 						</div>
 					</div>
 

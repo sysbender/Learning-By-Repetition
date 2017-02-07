@@ -2,6 +2,7 @@ package com.voxwalker.lbr.controller;
 
 import java.security.Principal;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.voxwalker.lbr.entity.Course;
-import com.voxwalker.lbr.entity.User;
 import com.voxwalker.lbr.service.CourseService;
 import com.voxwalker.lbr.service.UserService;
 
@@ -28,8 +28,10 @@ public class UserController {
 	private CourseService courseService;
 
 	@ModelAttribute("course")
-	private Course constructCourse() {
-		return new Course();
+	private Course constructCourse(HttpServletRequest request) {
+		Course course = new Course();
+		course.setLang((String)request.getSession().getAttribute("target_lang"));
+		return course;
 	}
 
 
