@@ -88,8 +88,8 @@ public class InitDbService {
 		Lesson lesson = new Lesson();
 		lesson.setCourse(course);
 		lesson.setName("english lesson 01");
-		lesson.setText1("long time ago, there is a hill. on the hill, there is a temple, in the temple, there is a monk.");
-		lesson.setAudio1("http://traffic.libsyn.com/blogrelations/Match20in20the20sky.mp3");
+		//lesson.setText1("long time ago, there is a hill. on the hill, there is a temple, in the temple, there is a monk.");
+		//lesson.setAudio1("http://traffic.libsyn.com/blogrelations/Match20in20the20sky.mp3");
 		lessonRepository.save(lesson);
 		
 		
@@ -97,8 +97,8 @@ public class InitDbService {
 		Lesson lesson2 = new Lesson();
 		lesson2.setCourse(course2);
 		lesson2.setName("french lesson 01");
-		lesson2.setText1("Il était une fois une maman cochon qui avait trois petits cochons. Elle les aimait beaucoup, mais comme il n'y avait pas assez de nourriture pour qu'ils puissent tous manger à leur faim, elle les a envoyé tenter leur chance dans le vaste monde.");
-		lesson2.setAudio1("http://www.thefrenchexperiment.com/audio/threepigs/threepigs1.mp3");
+		//lesson2.setText1("Il était une fois une maman cochon qui avait trois petits cochons. Elle les aimait beaucoup, mais comme il n'y avait pas assez de nourriture pour qu'ils puissent tous manger à leur faim, elle les a envoyé tenter leur chance dans le vaste monde.");
+		//lesson2.setAudio1("http://www.thefrenchexperiment.com/audio/threepigs/threepigs1.mp3");
 		lessonRepository.save(lesson2);
 	}
 	

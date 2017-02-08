@@ -6,5 +6,6 @@
 		<class>com.voxwalker.lbr.entity.Role</class>
 		<class>com.voxwalker.lbr.entity.Upload</class>
 		<class>com.voxwalker.lbr.entity.User</class>
+		<class>com.voxwalker.lbr.entity.Item</class>
 	</persistence-unit>
 </persistence>
