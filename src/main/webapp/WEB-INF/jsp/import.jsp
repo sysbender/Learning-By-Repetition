@@ -74,15 +74,17 @@
 					<div class="form-group">
 						<label for="lang" class="col-sm-2" control-label>language:</label>
 						<div class="col-sm-10">
-							<form:input   path="lang"   cssClass="form-control"  disabled="true" />
+							<form:input path="lang" cssClass="form-control" disabled="true" />
 						</div>
 					</div>
 
 					<div class="form-group">
 						<label for="share" class="col-sm-2" control-label>share:</label>
-						<div class="col-sm-10">			
-							<form:radiobutton path="share" value="-1" />Private 
-							<form:radiobutton path="share" value="0" />Public
+						<div class="col-sm-10">
+							<form:radiobutton path="share" value="-1" />
+							Private
+							<form:radiobutton path="share" value="0" />
+							Public
 						</div>
 					</div>
 
@@ -110,8 +112,9 @@
 	<thead>
 		<tr>
 			<th>course name</th>
-			<th>course description</th>
 			<th>course language</th>
+			<th>course description</th>
+			<th>Lessons</th>
 			<th>remove</th>
 		</tr>
 	</thead>
@@ -120,9 +123,14 @@
 		<c:forEach var="course" items="${user.courses }">
 
 			<tr>
-				<td>${course.name }</td>
-				<td>${course.desc }</td>
+				<td><a href="<spring:url value='/import/course/${course.id}.html'/>">${course.name }</a>
+					</td>
 				<td>${course.lang }</td>
+				<td>${course.desc }</td>
+
+				<td><c:forEach var="lesson" items="${course.lessons}">
+				${lesson.name} </c:forEach></td>
+
 				<td><a
 					href='<spring:url value="/import/remove/${course.id}.html" />'
 					class="btn btn-danger triggerRemove"> remove course:

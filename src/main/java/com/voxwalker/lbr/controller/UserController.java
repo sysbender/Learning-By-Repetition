@@ -47,6 +47,7 @@ public class UserController {
 	@RequestMapping("/import")
 	public String imports(Model model, Principal principal) {
 		String name = principal.getName();
+		//model.addAttribute("user", userService.findOneWithCourses(name));
 		model.addAttribute("user", userService.findOneWithCourses(name));
 		return "import";
 	}

@@ -10,4 +10,5 @@ import com.voxwalker.lbr.entity.User;
 public interface CourseRepository extends JpaRepository<Course, Long> {
 
 		List<Course> findByUser(User user);
+
 }

@@ -20,6 +20,9 @@
 	</definition>
 
 
+
+
+
 	<definition name="user-detail" extends="common">
 		<put-attribute name="title" value="User detail" />
 		<put-attribute name="body" value="/WEB-INF/jsp/user-detail.jsp" />
@@ -43,6 +46,14 @@
 	<definition name="import" extends="common">
 		<put-attribute name="title" value="Import" />
 		<put-attribute name="body" value="/WEB-INF/jsp/import.jsp" />
+		<put-attribute name="current" value="import" />
+	</definition>
+	
+	
+	
+	<definition name="import-course" extends="common">
+		<put-attribute name="title" value="Import course" />
+		<put-attribute name="body" value="/WEB-INF/jsp/import-course.jsp" />
 		<put-attribute name="current" value="import" />
 	</definition>
 

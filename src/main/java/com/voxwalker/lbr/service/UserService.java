@@ -28,6 +28,9 @@ public class UserService {
 	
 	@Autowired
 	private RoleRepository roleRepository;
+	
+	@Autowired
+	private CourseService courseService;
 
 	public List<User> findAll() {
 		return userRepository.findAll();
@@ -40,7 +43,8 @@ public class UserService {
 	@Transactional
 	public User findOneWithCourses(Long id) {
 		User user = findOne(id);
-		List<Course> courses = courseRepository.findByUser(user);
+		//List<Course> courses = courseRepository.findByUser(user);
+		List<Course> courses = courseService.findByUserWithLessons(user);
 		user.setCourses(courses);
 		return user;
 	}
