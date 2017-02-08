@@ -10,12 +10,16 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.voxwalker.lbr.entity.Course;
+import com.voxwalker.lbr.entity.Item;
 import com.voxwalker.lbr.entity.Lesson;
 import com.voxwalker.lbr.entity.Role;
+import com.voxwalker.lbr.entity.Upload;
 import com.voxwalker.lbr.entity.User;
 import com.voxwalker.lbr.repository.CourseRepository;
+import com.voxwalker.lbr.repository.ItemRepository;
 import com.voxwalker.lbr.repository.LessonRepository;
 import com.voxwalker.lbr.repository.RoleRepository;
+import com.voxwalker.lbr.repository.UploadRepository;
 import com.voxwalker.lbr.repository.UserRepository;
 
 @Transactional
@@ -34,6 +38,12 @@ public class InitDbService {
 	
 	@Autowired
 	private LessonRepository lessonRepository;
+	
+	@Autowired
+	private UploadRepository uploadRepository;
+	
+	@Autowired
+	private ItemRepository itemRepository;
 	
 	
 	@PostConstruct // executed after dependency injection is done to perform any initialization.
@@ -100,6 +110,38 @@ public class InitDbService {
 		//lesson2.setText1("Il était une fois une maman cochon qui avait trois petits cochons. Elle les aimait beaucoup, mais comme il n'y avait pas assez de nourriture pour qu'ils puissent tous manger à leur faim, elle les a envoyé tenter leur chance dans le vaste monde.");
 		//lesson2.setAudio1("http://www.thefrenchexperiment.com/audio/threepigs/threepigs1.mp3");
 		lessonRepository.save(lesson2);
+		
+		Upload upload = new Upload();
+		upload.setLesson(lesson);
+		upload.setName("lesson01text");
+		upload.setFile("test.mp3");
+		upload.setUrl("http://localhost/test.mp3");
+		uploadRepository.save(upload);
+		
+		Item item = new Item();
+		item.setLesson(lesson);
+		item.setGenre("Text");
+		item.setLang("en");
+		item.setTxt("this is text for lesson, please learn hard....");
+		item.setAudioUrl("http://localhost/test.mp3");
+		itemRepository.save(item);
+		
+		
+		Upload upload2 = new Upload();
+		upload2.setLesson(lesson2);
+		upload2.setName("lesson01text");
+		upload2.setFile("test.mp3");
+		upload2.setUrl("http://localhost/test.mp3");
+		uploadRepository.save(upload2);
+		
+		Item item2 = new Item();
+		item2.setLesson(lesson2);
+		item2.setGenre("Text");
+		item2.setLang("en");
+		item2.setTxt("this is text for lesson, please learn hard....");
+		item2.setAudioUrl("http://localhost/test.mp3");
+		itemRepository.save(item2);
+		
 	}
 	
 	

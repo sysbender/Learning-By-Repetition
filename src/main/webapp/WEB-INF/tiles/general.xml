@@ -28,9 +28,9 @@
 		<put-attribute name="body" value="/WEB-INF/jsp/user-detail.jsp" />
 		<put-attribute name="current" value="users" />
 	</definition>
-	
-	
-		<definition name="account" extends="common">
+
+
+	<definition name="account" extends="common">
 		<put-attribute name="title" value="My account" />
 		<put-attribute name="body" value="/WEB-INF/jsp/user-account.jsp" />
 		<put-attribute name="current" value="account" />
@@ -48,14 +48,23 @@
 		<put-attribute name="body" value="/WEB-INF/jsp/import.jsp" />
 		<put-attribute name="current" value="import" />
 	</definition>
-	
-	
-	
+
+
+
 	<definition name="import-course" extends="common">
 		<put-attribute name="title" value="Import course" />
 		<put-attribute name="body" value="/WEB-INF/jsp/import-course.jsp" />
 		<put-attribute name="current" value="import" />
 	</definition>
+
+	<definition name="import-lesson" extends="common">
+		<put-attribute name="title" value="Import lesson" />
+		<put-attribute name="body" value="/WEB-INF/jsp/import-lesson.jsp" />
+		<put-attribute name="current" value="import" />
+	</definition>
+
+
+
 
 	<definition name="login" extends="common">
 		<put-attribute name="title" value="Login" />
