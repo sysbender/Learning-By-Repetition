@@ -7,12 +7,16 @@ import org.springframework.stereotype.Service;
 
 import com.voxwalker.lbr.entity.Course;
 import com.voxwalker.lbr.entity.Lesson;
+import com.voxwalker.lbr.repository.CourseRepository;
 import com.voxwalker.lbr.repository.LessonRepository;
 
 @Service
 public class LessonService {
 	@Autowired
 	private LessonRepository lessonRepository;
+	
+	@Autowired
+	private CourseRepository courseRepository;
 
 	public Lesson findOne(Long id) {
 		// TODO Auto-generated method stub
@@ -27,6 +31,13 @@ public class LessonService {
 	public List<Lesson> findByCourse(Course course) {
 		 
 		return lessonRepository.findByCourse(course);
+	}
+
+	public void save(Lesson lesson, Long course_id, String username) {
+		 Course course = courseRepository.findOne(course_id);
+		 lesson.setCourse(course);
+		 lessonRepository.save(lesson);
+		
 	}
 
 }

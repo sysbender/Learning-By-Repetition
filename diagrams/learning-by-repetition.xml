@@ -1,16 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?><entities>
 	<entity>
-		<entity-name>com.voxwalker.lbr.entity.Upload</entity-name>
-		<entity-width>120</entity-width>
-		<entity-height>186</entity-height>
-		<entity-X-Coordinate>355</entity-X-Coordinate>
-		<entity-Y-Coordinate>299</entity-Y-Coordinate>
-		<primary-collapsed>false</primary-collapsed>
-		<relation-collapsed>false</relation-collapsed>
-		<basic-collapsed>false</basic-collapsed>
-	</entity>
-
-	<entity>
 		<entity-name>com.voxwalker.lbr.entity.User</entity-name>
 		<entity-width>120</entity-width>
 		<entity-height>226</entity-height>
@@ -22,21 +11,32 @@
 	</entity>
 
 	<entity>
-		<entity-name>com.voxwalker.lbr.entity.Lesson</entity-name>
+		<entity-name>com.voxwalker.lbr.entity.Upload</entity-name>
 		<entity-width>120</entity-width>
 		<entity-height>186</entity-height>
-		<entity-X-Coordinate>686</entity-X-Coordinate>
-		<entity-Y-Coordinate>27</entity-Y-Coordinate>
+		<entity-X-Coordinate>511</entity-X-Coordinate>
+		<entity-Y-Coordinate>305</entity-Y-Coordinate>
 		<primary-collapsed>false</primary-collapsed>
 		<relation-collapsed>false</relation-collapsed>
 		<basic-collapsed>false</basic-collapsed>
 	</entity>
 
 	<entity>
-		<entity-name>com.voxwalker.lbr.entity.Role</entity-name>
+		<entity-name>com.voxwalker.lbr.entity.Lesson</entity-name>
 		<entity-width>120</entity-width>
-		<entity-height>146</entity-height>
-		<entity-X-Coordinate>88</entity-X-Coordinate>
+		<entity-height>186</entity-height>
+		<entity-X-Coordinate>560</entity-X-Coordinate>
+		<entity-Y-Coordinate>29</entity-Y-Coordinate>
+		<primary-collapsed>false</primary-collapsed>
+		<relation-collapsed>false</relation-collapsed>
+		<basic-collapsed>false</basic-collapsed>
+	</entity>
+
+	<entity>
+		<entity-name>com.voxwalker.lbr.entity.Item</entity-name>
+		<entity-width>120</entity-width>
+		<entity-height>266</entity-height>
+		<entity-X-Coordinate>676</entity-X-Coordinate>
 		<entity-Y-Coordinate>300</entity-Y-Coordinate>
 		<primary-collapsed>false</primary-collapsed>
 		<relation-collapsed>false</relation-collapsed>
@@ -55,11 +55,11 @@
 	</entity>
 
 	<entity>
-		<entity-name>com.voxwalker.lbr.entity.Item</entity-name>
+		<entity-name>com.voxwalker.lbr.entity.Role</entity-name>
 		<entity-width>120</entity-width>
-		<entity-height>266</entity-height>
-		<entity-X-Coordinate>655</entity-X-Coordinate>
-		<entity-Y-Coordinate>274</entity-Y-Coordinate>
+		<entity-height>146</entity-height>
+		<entity-X-Coordinate>88</entity-X-Coordinate>
+		<entity-Y-Coordinate>300</entity-Y-Coordinate>
 		<primary-collapsed>false</primary-collapsed>
 		<relation-collapsed>false</relation-collapsed>
 		<basic-collapsed>false</basic-collapsed>
