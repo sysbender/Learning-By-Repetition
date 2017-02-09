@@ -2,6 +2,7 @@ package com.voxwalker.lbr.entity;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -27,11 +28,11 @@ public class Lesson {
 	@JoinColumn(name="course_id")
 	private Course course;
 	
-	@OneToMany(mappedBy="lesson")
+	@OneToMany(mappedBy="lesson", cascade=CascadeType.REMOVE)
 	private List<Upload> uploads;
 	
 	
-	@OneToMany(mappedBy="lesson")
+	@OneToMany(mappedBy="lesson" , cascade=CascadeType.REMOVE)
 	private List<Item> items;
 	
 

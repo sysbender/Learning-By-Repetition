@@ -18,4 +18,14 @@ public class UploadService {
 		 
 		return uploadRepository.findByLesson(lesson);
 	}
+
+	public Upload findOne(long id) {
+		 
+		return uploadRepository.findOne(id);
+	}
+
+	public void delete(Upload upload) {
+		uploadRepository.delete(upload);
+		
+	}
 }

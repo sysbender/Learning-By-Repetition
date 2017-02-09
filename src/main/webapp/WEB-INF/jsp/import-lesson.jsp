@@ -22,7 +22,7 @@
 				<td><c:out value="${upload.file}" /></td>
 				<td><c:out value="${upload.url}" /></td>
 				<td><a
-					href='<spring:url value="/import/lesson/upload/remove/${upload.id}.html" />'
+					href='<spring:url value="/import/upload/remove/${upload.id}.html" />'
 					class="btn btn-danger triggerRemove"> remove course:
 						${upload.id} </a></td>
 			</tr>
@@ -57,7 +57,7 @@
 				 
 				<td><c:out value="${item.txt}" /></td>
 				<td><a
-					href='<spring:url value="/import/lesson/item/remove/${item.id}.html" />'
+					href='<spring:url value="/import/item/remove/${item.id}.html" />'
 					class="btn btn-danger triggerRemove"> remove course:
 						${item.id} </a></td>
 			</tr>

@@ -18,6 +18,16 @@ public class ItemService {
 		 
 		return itemRepository.findByLesson(lesson);
 	}
+
+	public Item findOne(long id) {
+		return itemRepository.findOne(id);
+		
+	}
+
+	public void delete(Item item) {
+		itemRepository.delete(item);
+		
+	}
 	
 
 }
