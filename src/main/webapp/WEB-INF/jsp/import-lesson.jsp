@@ -135,7 +135,7 @@
 					<div class="form-group">
 						<label for="desc" class="col-sm-2" control-label>Text:</label>
 						<div class="col-sm-10">
-							<form:textarea path="txt" cssClass="form-control" />
+							<form:textarea path="txt" cssClass="form-control"  rows="8"/>
 						</div>
 					</div>
 

@@ -5,8 +5,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 
+import org.hibernate.annotations.Type;
 import org.hibernate.validator.constraints.URL;
 
 @Entity
@@ -18,6 +20,9 @@ public class Item {
 	
 	private String genre;
 	private String lang;
+	@Lob
+	@Type(type="org.hibernate.type.StringClobType")
+	@Column(length = Integer.MAX_VALUE)
 	private String txt;
 	private boolean match; // if txt match audio
 	@URL
