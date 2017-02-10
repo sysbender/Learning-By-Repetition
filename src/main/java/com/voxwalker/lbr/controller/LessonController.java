@@ -1,7 +1,9 @@
 package com.voxwalker.lbr.controller;
 
 import java.io.File;
+import java.security.Principal;
 import java.util.List;
+import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -21,6 +23,7 @@ import com.voxwalker.lbr.entity.Upload;
 import com.voxwalker.lbr.service.ItemService;
 import com.voxwalker.lbr.service.LessonService;
 import com.voxwalker.lbr.service.UploadService;
+import com.voxwalker.lbr.service.UserService;
 
 @Controller
 public class LessonController {
@@ -33,6 +36,9 @@ public class LessonController {
 
 	@Autowired
 	private UploadService uploadService;
+
+	@Autowired
+	private UserService userService;
 
 	// init lesson item for itemForm
 	@ModelAttribute("item")
@@ -52,63 +58,27 @@ public class LessonController {
 		Lesson lesson = lessonService.findOne(lesson_id);
 		System.out.println(lesson_id + " = id;====================== name = "
 				+ lesson.getName());
+		List<Upload> uploads = uploadService.findByLesson(lesson);
 		List<Item> items = itemService.findByLesson(lesson);
-		System.out.println("====================item size =" + items.size());
-		model.addAttribute("items", itemService.findByLesson(lesson));
-		model.addAttribute("uploads", uploadService.findByLesson(lesson));
+		System.out.println("====================item size =" + items.size() +"upload size:" + uploads.size());
+		model.addAttribute("items", items);
+		model.addAttribute("uploads", uploads);
 		return "import-lesson";
 	}
 
-	@RequestMapping(value="/import/lesson/{lesson_id}" , method=RequestMethod.POST, params="item")
-	public String doAddItem( @PathVariable long lesson_id, @ModelAttribute("item") Item item ){
-		System.out.println( "=========new item =======");
+	@RequestMapping(value = "/import/lesson/{lesson_id}", method = RequestMethod.POST, params = "item")
+	public String doAddItem(@PathVariable long lesson_id,
+			@ModelAttribute("item") Item item) {
+		System.out.println("=========new item =======");
 		Lesson lesson = lessonService.findOne(lesson_id);
 		item.setLesson(lesson);
 		itemService.save(item);
-		
-		return "redirect:/import/lesson/" + lesson_id +".html";
+
+		return "redirect:/import/lesson/" + lesson_id + ".html";
 	}
+
 	
-	
-	
-	
-	@RequestMapping(value="/import/lesson/{lesson_id}" , method=RequestMethod.POST, params="upload")
-	public String doAddItem( @PathVariable long lesson_id, @ModelAttribute("upload") Upload upload , @RequestParam("multipartFile") MultipartFile multipartFile){
-		System.out.println( "=========new upload =======");
-		
-		 
-		if(!multipartFile.isEmpty()){
-			try{
-				Lesson lesson = lessonService.findOne(lesson_id);
-				// temp dir
-				File dir = new File("d:/tmp"+File.separator+"tmpFiles");
-				if(!dir.exists()) {
-					dir.mkdirs();
-				}
-				
-				// move file
-				
-				File serverFile = new File(dir.getAbsolutePath()+ File.separator + multipartFile.getOriginalFilename());
-				multipartFile.transferTo(serverFile);
-				System.out.println(" @@@@@@@@@@  canonical:"+ serverFile.getCanonicalPath());
-				System.out.println(" name:"+ serverFile.getName());
-				System.out.println(" AbsolutePath:"+ serverFile.getAbsolutePath());
-				upload.setSize(multipartFile.getSize());
-				upload.setLesson(lesson);
-				upload.setFile( serverFile.getCanonicalPath());
-				upload.setName( serverFile.getName());
-				uploadService.save(upload);
-				
-			}catch(Exception e){
-				e.printStackTrace();
-			}
-		}
-			
-			
-			
-		return "redirect:/import/lesson/" + lesson_id +".html";
-	}
-	
+
 	@RequestMapping("/import/item/remove/{item_id}")
 	public String removeItem(@PathVariable long item_id) {
 		System.out.println("==========remove Item============");
@@ -130,53 +100,65 @@ public class LessonController {
 		uploadService.delete(upload);
 		return "redirect:/import/lesson/" + lesson_id + ".html";
 	}
-	
-	
-	
-	
-	
-	@RequestMapping(value="/import/upload/{lesson_id}" , method=RequestMethod.POST)
-	public String doUpload( @PathVariable long lesson_id, @ModelAttribute("upload") Upload upload , @RequestParam("multipartFile") MultipartFile multipartFile){
-		System.out.println( "=========new upload =======");
-		
-		 
-		if(!multipartFile.isEmpty()){
-			try{
+
+
+	@RequestMapping(value = "/import/lesson/{lesson_id}", method = RequestMethod.POST, params = "upload")
+	public String doUpload(@PathVariable long lesson_id,
+			@ModelAttribute("upload") Upload upload,
+			@RequestParam("multipartFile") MultipartFile multipartFile,
+			HttpServletRequest request, Principal principal) {
+		System.out.println("=========new upload =======");
+
+		if (!multipartFile.isEmpty()) {
+			try {
 				Lesson lesson = lessonService.findOne(lesson_id);
-				// temp dir
-				File dir = new File("d:/tmp"+File.separator+"tmpFiles");
-				if(!dir.exists()) {
-					dir.mkdirs();
+				Long course_id = lesson.getCourse().getId();
+				String username = principal.getName();
+				Long user_id = userService.findByName(username).getId();
+
+				// relativePath = /resource/upload/user_id/course_id/lesson_id
+				String relativePath = File.separator + "upload"
+						+ File.separator + user_id + File.separator + course_id
+						+ File.separator + lesson_id;
+				File absolutePath = new File(request.getServletContext()
+						.getRealPath("/") + relativePath);
+				if (!absolutePath.exists()) {
+					absolutePath.mkdirs();
+
 				}
-				
-				// move file
-				
-				File serverFile = new File(dir.getAbsolutePath()+ File.separator + multipartFile.getOriginalFilename());
+				System.out.println("================upload to dir: "
+						+ absolutePath.getAbsolutePath());
+
+				// move file to new name: random uuid + extension
+				String newFilename =multipartFile.getOriginalFilename().replaceAll("[^a-zA-Z0-9.]", "-");
+
+				File serverFile = new File(absolutePath.getAbsolutePath()
+						+ File.separator + newFilename);
 				multipartFile.transferTo(serverFile);
-				System.out.println(" @@@@@@@@@@  canonical:"+ serverFile.getCanonicalPath());
-				System.out.println(" name:"+ serverFile.getName());
-				System.out.println(" AbsolutePath:"+ serverFile.getAbsolutePath());
+
+				// save info to upload table
+				System.out.println(" ============@@@@@@@@@@  canonical:"
+						+ serverFile.getCanonicalPath());
+				System.out.println(" name:" + serverFile.getName());
+				System.out.println(" AbsolutePath:"
+						+ serverFile.getAbsolutePath());
 				upload.setSize(multipartFile.getSize());
 				upload.setLesson(lesson);
-				upload.setFile( serverFile.getCanonicalPath());
-				upload.setName( serverFile.getName());
-				uploadService.save(upload);
+				upload.setFile(serverFile.getCanonicalPath());
 				
-			}catch(Exception e){
+				System.out.println("relative path = "+ relativePath);
+				String temp = relativePath.replace("\\", "/");
+				System.out.println( "after replace = " + temp);
+				
+				upload.setUrl(relativePath.replace("\\", "/")+"/"+newFilename);
+				upload.setName(multipartFile.getOriginalFilename());
+				uploadService.save(upload);
+
+			} catch (Exception e) {
 				e.printStackTrace();
 			}
 		}
-			
-			
-			
-		return "redirect:/import/lesson/" + lesson_id +".html";
-	}
-	
-	
-	
-	
-	
-	
-	
 
+		return "redirect:/import/lesson/" + lesson_id + ".html";
+	}
 }

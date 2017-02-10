@@ -81,8 +81,8 @@
 <form:form commandName="item" cssClass="form-horizontal itemForm">
 
 	<!-- Modal -->
-	<div class="modal fade" id="myItemModal" tabindex="-1" role="dialog"
-		aria-labelledby="myModalLabel">
+	<div class="modal fade modal-lg" id="myItemModal" tabindex="-1"
+		role="dialog" aria-labelledby="myModalLabel">
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
@@ -95,18 +95,30 @@
 				<div class="modal-body">
 
 					<div class="form-group">
-						<label for="name" class="col-sm-2" control-label>URL:</label>
+						<label for="name" class="col-sm-2 control-label">URL:</label>
 						<div class="col-sm-10">
-							<form:input path="audioUrl" cssClass="form-control" />
-							<label>start at(s): </label>
+							<form:input path="audioUrl" cssClass="form-control"
+								list="uploadUrls" />
+							<datalist id="uploadUrls">
+								<c:forEach var="upload" items="${uploads}">
+									<option value='<c:out value="${upload.url}" />'>
+								</c:forEach>
+							</datalist>
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label for="cueStart" class="col-sm-2 control-label"> </label>
+						<div class="col-sm-10">
+							start at(s):
 							<form:input path="cueStart" size="5" />
-							<label>end at(s): </label>
+							 end at(s):
 							<form:input path="cueEnd" size="5" />
 						</div>
 					</div>
 
 					<div class="form-group">
-						<label for="lang" class="col-sm-2" control-label>language:</label>
+						<label for="lang" class="col-sm-2 control-label">language:</label>
 						<div class="col-sm-10">
 							<form:input path="lang" />
 							<label>match: </label>
@@ -115,7 +127,7 @@
 					</div>
 
 					<div class="form-group">
-						<label for="share" class="col-sm-2" control-label>Genre:</label>
+						<label for="share" class="col-sm-2 control-label">Genre:</label>
 						<div class="col-sm-10">
 							<form:select path="genre">
 								<form:option value="NONE" label="--- Select ---" />
@@ -128,7 +140,7 @@
 					</div>
 
 					<div class="form-group">
-						<label for="desc" class="col-sm-2" control-label>Text:</label>
+						<label for="desc" class="col-sm-2 control-label">Text:</label>
 						<div class="col-sm-10">
 							<form:textarea path="txt" cssClass="form-control" rows="8" />
 						</div>
@@ -179,16 +191,15 @@
 
 
 <h2>uploads list:</h2>
-<form:form commandName="upload"
-	cssClass="uploadForm form-inline"
+<form:form commandName="upload" cssClass="uploadForm form-inline"
 	enctype="multipart/form-data" id="uploadForm">
 
 	<input name="upload" type="submit" value="Upload"
 		class="btn btn-primary" />
 
 	<div class="form-group">
-		<label for="multipartFile">Upload a file:</label> <input type="file"
-			id="multipartFile" name="multipartFile" class="form-control" />
+		<input type="file" id="multipartFile" name="multipartFile"
+			class="form-control" />
 	</div>
 
 </form:form>

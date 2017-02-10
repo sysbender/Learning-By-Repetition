@@ -64,7 +64,7 @@
 
 
 					<div class="form-group">
-						<label for="name" class="col-sm-2" control-label>name:</label>
+						<label for="name" class="col-sm-2 control-label" >name:</label>
 						<div class="col-sm-10">
 							<form:input path="name" cssClass="form-control" />
 							<form:errors path="name" />
@@ -72,14 +72,14 @@
 					</div>
 
 					<div class="form-group">
-						<label for="lang" class="col-sm-2" control-label>language:</label>
+						<label for="lang" class="col-sm-2 control-label" >language:</label>
 						<div class="col-sm-10">
 							<form:input path="lang" cssClass="form-control" disabled="true" />
 						</div>
 					</div>
 
 					<div class="form-group">
-						<label for="share" class="col-sm-2" control-label>share:</label>
+						<label for="share" class="col-sm-2 control-label" >share:</label>
 						<div class="col-sm-10">
 							<form:radiobutton path="share" value="-1" />
 							Private
@@ -89,7 +89,7 @@
 					</div>
 
 					<div class="form-group">
-						<label for="desc" class="col-sm-2" control-label>description:</label>
+						<label for="desc" class="col-sm-2 control-label" >description:</label>
 						<div class="col-sm-10">
 							<form:textarea path="desc" cssClass="form-control" />
 						</div>
