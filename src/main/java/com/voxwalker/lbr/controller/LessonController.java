@@ -1,5 +1,6 @@
 package com.voxwalker.lbr.controller;
 
+import java.io.File;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -11,6 +12,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.voxwalker.lbr.entity.Item;
 import com.voxwalker.lbr.entity.Lesson;
@@ -66,9 +69,43 @@ public class LessonController {
 		return "redirect:/import/lesson/" + lesson_id +".html";
 	}
 	
+	
+	
+	
 	@RequestMapping(value="/import/lesson/{lesson_id}" , method=RequestMethod.POST, params="upload")
-	public String doAddItem( @PathVariable long lesson_id, @ModelAttribute("upload") Upload upload ){
+	public String doAddItem( @PathVariable long lesson_id, @ModelAttribute("upload") Upload upload , @RequestParam("multipartFile") MultipartFile multipartFile){
 		System.out.println( "=========new upload =======");
+		
+		 
+		if(!multipartFile.isEmpty()){
+			try{
+				Lesson lesson = lessonService.findOne(lesson_id);
+				// temp dir
+				File dir = new File("d:/tmp"+File.separator+"tmpFiles");
+				if(!dir.exists()) {
+					dir.mkdirs();
+				}
+				
+				// move file
+				
+				File serverFile = new File(dir.getAbsolutePath()+ File.separator + multipartFile.getOriginalFilename());
+				multipartFile.transferTo(serverFile);
+				System.out.println(" @@@@@@@@@@  canonical:"+ serverFile.getCanonicalPath());
+				System.out.println(" name:"+ serverFile.getName());
+				System.out.println(" AbsolutePath:"+ serverFile.getAbsolutePath());
+				upload.setSize(multipartFile.getSize());
+				upload.setLesson(lesson);
+				upload.setFile( serverFile.getCanonicalPath());
+				upload.setName( serverFile.getName());
+				uploadService.save(upload);
+				
+			}catch(Exception e){
+				e.printStackTrace();
+			}
+		}
+			
+			
+			
 		return "redirect:/import/lesson/" + lesson_id +".html";
 	}
 	
@@ -93,5 +130,53 @@ public class LessonController {
 		uploadService.delete(upload);
 		return "redirect:/import/lesson/" + lesson_id + ".html";
 	}
+	
+	
+	
+	
+	
+	@RequestMapping(value="/import/upload/{lesson_id}" , method=RequestMethod.POST)
+	public String doUpload( @PathVariable long lesson_id, @ModelAttribute("upload") Upload upload , @RequestParam("multipartFile") MultipartFile multipartFile){
+		System.out.println( "=========new upload =======");
+		
+		 
+		if(!multipartFile.isEmpty()){
+			try{
+				Lesson lesson = lessonService.findOne(lesson_id);
+				// temp dir
+				File dir = new File("d:/tmp"+File.separator+"tmpFiles");
+				if(!dir.exists()) {
+					dir.mkdirs();
+				}
+				
+				// move file
+				
+				File serverFile = new File(dir.getAbsolutePath()+ File.separator + multipartFile.getOriginalFilename());
+				multipartFile.transferTo(serverFile);
+				System.out.println(" @@@@@@@@@@  canonical:"+ serverFile.getCanonicalPath());
+				System.out.println(" name:"+ serverFile.getName());
+				System.out.println(" AbsolutePath:"+ serverFile.getAbsolutePath());
+				upload.setSize(multipartFile.getSize());
+				upload.setLesson(lesson);
+				upload.setFile( serverFile.getCanonicalPath());
+				upload.setName( serverFile.getName());
+				uploadService.save(upload);
+				
+			}catch(Exception e){
+				e.printStackTrace();
+			}
+		}
+			
+			
+			
+		return "redirect:/import/lesson/" + lesson_id +".html";
+	}
+	
+	
+	
+	
+	
+	
+	
 
 }

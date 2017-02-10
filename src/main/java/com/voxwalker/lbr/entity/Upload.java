@@ -14,6 +14,7 @@ public class Upload {
 	private String name;
 	private String file;
 	private String url;
+	private long size;
 	
 	@ManyToOne
 	@JoinColumn(name="lesson_id")
@@ -57,6 +58,14 @@ public class Upload {
 
 	public void setLesson(Lesson lesson) {
 		this.lesson = lesson;
+	}
+
+	public long getSize() {
+		return size;
+	}
+
+	public void setSize(long size) {
+		this.size = size;
 	}
 	
 	

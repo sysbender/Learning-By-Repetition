@@ -28,4 +28,9 @@ public class UploadService {
 		uploadRepository.delete(upload);
 		
 	}
+
+	public void save(Upload upload) {
+		uploadRepository.save(upload);
+		
+	}
 }

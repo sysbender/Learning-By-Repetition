@@ -7,6 +7,38 @@
 <Script type="text/javascript">
 	$(document).ready(
 			function() {
+
+				/* //upload
+				$('#uploadForm').on('submit', function(event){
+					event.preventDefault();
+					var formData = new FormData($('#uploadForm')); // get form data
+					  $form = $(this); //wrap this in jQuery
+					  alert('the action is: ' + $form.attr('action'));
+					var actionUrl =  $form.attr('action');
+					console.log("action" + actionUrl);
+					$.ajax({
+						xhr : function() {
+							var xhr = new window.XMLHttpRequest();
+							xhr.upload.addEventListener('progress', function(e){
+								if(e.lengthComputable){
+									console.log('Bytes loaded:' + e.loaded);
+									console.log('total size: ' + e.total);
+									console.log('percentage :' + e.loaded/e.total);
+								}
+							});
+							return xhr;
+						},
+						type : 'POST',
+						url: actionUrl,
+						data: formData,
+						processData: false,
+						contentType: false,
+						success: function(){
+							alert(' file uploaded! ');
+						}
+					});
+				}); */
+
 				//alert for removing
 				$(".triggerRemove").click(
 						function(e) {
@@ -39,54 +71,17 @@
 </Script>
 
 
-<h2>uploads list:</h2>
-
-
-
-
-<!-- **************            ******************* -->
-<table class="table table-bordered">
-	<thead>
-		<tr>
-			<th>name</th>
-			<th>file</th>
-			<th>url</th>
-			<th>remove</th>
-		</tr>
-	</thead>
-
-	<tbody>
-		<c:forEach var="upload" items="${uploads}">
-
-			<tr>
-				<td><c:out value="${upload.name}" /></td>
-				<td><c:out value="${upload.file}" /></td>
-				<td><c:out value="${upload.url}" /></td>
-				<td><a
-					href='<spring:url value="/import/upload/remove/${upload.id}.html" />'
-					class="btn btn-danger triggerRemove"> remove:
-						${upload.id} </a></td>
-			</tr>
-
-		</c:forEach>
-
-
-	</tbody>
-
-</table>
-
-
 <!-- *******************items **************************** -->
 <h2>items list:</h2>
 
 <!-- Button trigger modal -->
 <button type="button" class="btn btn-primary btn-lg" data-toggle="modal"
-	data-target="#myModal">New Item</button>
+	data-target="#myItemModal">New Item</button>
 
 <form:form commandName="item" cssClass="form-horizontal itemForm">
 
 	<!-- Modal -->
-	<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
+	<div class="modal fade" id="myItemModal" tabindex="-1" role="dialog"
 		aria-labelledby="myModalLabel">
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
@@ -135,7 +130,7 @@
 					<div class="form-group">
 						<label for="desc" class="col-sm-2" control-label>Text:</label>
 						<div class="col-sm-10">
-							<form:textarea path="txt" cssClass="form-control"  rows="8"/>
+							<form:textarea path="txt" cssClass="form-control" rows="8" />
 						</div>
 					</div>
 
@@ -171,8 +166,7 @@
 				<td><c:out value="${item.txt}" /></td>
 				<td><a
 					href='<spring:url value="/import/item/remove/${item.id}.html" />'
-					class="btn btn-danger triggerRemove"> remove: ${item.id}
-				</a></td>
+					class="btn btn-danger triggerRemove"> remove: ${item.id} </a></td>
 			</tr>
 
 		</c:forEach>
@@ -184,6 +178,52 @@
 
 
 
+<h2>uploads list:</h2>
+<form:form commandName="upload"
+	cssClass="uploadForm form-inline"
+	enctype="multipart/form-data" id="uploadForm">
+
+	<input name="upload" type="submit" value="Upload"
+		class="btn btn-primary" />
+
+	<div class="form-group">
+		<label for="multipartFile">Upload a file:</label> <input type="file"
+			id="multipartFile" name="multipartFile" class="form-control" />
+	</div>
+
+</form:form>
+<hr>
+
+
+<!-- **************     upload list       ******************* -->
+<table class="table table-bordered">
+	<thead>
+		<tr>
+			<th>name</th>
+			<th>file</th>
+			<th>url</th>
+			<th>remove</th>
+		</tr>
+	</thead>
+
+	<tbody>
+		<c:forEach var="upload" items="${uploads}">
+
+			<tr>
+				<td><c:out value="${upload.name}" /></td>
+				<td><c:out value="${upload.file}" /></td>
+				<td><c:out value="${upload.url}" /></td>
+				<td><a
+					href='<spring:url value="/import/upload/remove/${upload.id}.html" />'
+					class="btn btn-danger triggerRemove"> remove: ${upload.id} </a></td>
+			</tr>
+
+		</c:forEach>
+
+
+	</tbody>
+
+</table>
 
 
 
