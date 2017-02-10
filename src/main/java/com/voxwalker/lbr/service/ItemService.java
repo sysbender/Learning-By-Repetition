@@ -28,6 +28,11 @@ public class ItemService {
 		itemRepository.delete(item);
 		
 	}
+
+	public void save(Item item) {
+		itemRepository.save(item);
+		
+	}
 	
 
 }

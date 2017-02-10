@@ -2,11 +2,15 @@ package com.voxwalker.lbr.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.voxwalker.lbr.entity.Item;
 import com.voxwalker.lbr.entity.Lesson;
@@ -27,6 +31,18 @@ public class LessonController {
 	@Autowired
 	private UploadService uploadService;
 
+	// init lesson item for itemForm
+	@ModelAttribute("item")
+	private Item constructItem(HttpServletRequest request) {
+		return new Item();
+	}
+
+	// init lesson upload for uploadForm
+	@ModelAttribute("upload")
+	private Upload constructUpload(HttpServletRequest request) {
+		return new Upload();
+	}
+
 	@RequestMapping("/import/lesson/{lesson_id}")
 	public String lesson(@PathVariable Long lesson_id, Model model) {
 
@@ -40,6 +56,22 @@ public class LessonController {
 		return "import-lesson";
 	}
 
+	@RequestMapping(value="/import/lesson/{lesson_id}" , method=RequestMethod.POST, params="item")
+	public String doAddItem( @PathVariable long lesson_id, @ModelAttribute("item") Item item ){
+		System.out.println( "=========new item =======");
+		Lesson lesson = lessonService.findOne(lesson_id);
+		item.setLesson(lesson);
+		itemService.save(item);
+		
+		return "redirect:/import/lesson/" + lesson_id +".html";
+	}
+	
+	@RequestMapping(value="/import/lesson/{lesson_id}" , method=RequestMethod.POST, params="upload")
+	public String doAddItem( @PathVariable long lesson_id, @ModelAttribute("upload") Upload upload ){
+		System.out.println( "=========new upload =======");
+		return "redirect:/import/lesson/" + lesson_id +".html";
+	}
+	
 	@RequestMapping("/import/item/remove/{item_id}")
 	public String removeItem(@PathVariable long item_id) {
 		System.out.println("==========remove Item============");
