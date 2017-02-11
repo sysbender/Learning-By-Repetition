@@ -63,8 +63,29 @@
 		<put-attribute name="current" value="import" />
 	</definition>
 
+<!-- learn -->
 
+	<definition name="learn" extends="common">
+		<put-attribute name="title" value="Learn" />
+		<put-attribute name="body" value="/WEB-INF/jsp/learn.jsp" />
+		<put-attribute name="current" value="learn" />
+	</definition>
 
+	<definition name="learn-lesson" extends="common">
+		<put-attribute name="title" value="Learn lesson" />
+		<put-attribute name="body" value="/WEB-INF/jsp/learn-lesson.jsp" />
+		<put-attribute name="current" value="learn" />
+	</definition>
+
+<!-- review -->
+
+	<definition name="review" extends="common">
+		<put-attribute name="title" value="Review" />
+		<put-attribute name="body" value="/WEB-INF/jsp/review.jsp" />
+		<put-attribute name="current" value="review" />
+	</definition>
+	
+	
 
 	<definition name="login" extends="common">
 		<put-attribute name="title" value="Login" />

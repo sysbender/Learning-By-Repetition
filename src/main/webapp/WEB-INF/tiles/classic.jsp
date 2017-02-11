@@ -95,6 +95,12 @@
 
 							<li class="${current =='import' ? 'active' : '' }"><a
 								href='<spring:url value="/import.html"/>'>Import</a></li>
+								
+							<li class="${current =='learn' ? 'active' : '' }"><a
+								href='<spring:url value="/learn.html"/>'>Learn</a></li>
+								
+							<li class="${current =='review' ? 'active' : '' }"><a
+								href='<spring:url value="/review.html"/>'>Review</a></li>
 
 						</security:authorize>
 					</ul>

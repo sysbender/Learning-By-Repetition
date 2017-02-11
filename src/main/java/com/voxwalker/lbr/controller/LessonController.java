@@ -1,9 +1,9 @@
 package com.voxwalker.lbr.controller;
 
 import java.io.File;
+import java.net.URL;
 import java.security.Principal;
 import java.util.List;
-import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -150,7 +150,13 @@ public class LessonController {
 				String temp = relativePath.replace("\\", "/");
 				System.out.println( "after replace = " + temp);
 				
-				upload.setUrl(relativePath.replace("\\", "/")+"/"+newFilename);
+				// from stackoverflow
+				URL requestURL = new URL(request.getRequestURL().toString());
+			    String port = requestURL.getPort() == -1 ? "" : ":" + requestURL.getPort();
+			    String baseUrl = requestURL.getProtocol() + "://" + requestURL.getHost() + port;
+			    
+				upload.setUrl( baseUrl + relativePath.replace("\\", "/")+"/"+newFilename);
+				
 				upload.setName(multipartFile.getOriginalFilename());
 				uploadService.save(upload);
 
