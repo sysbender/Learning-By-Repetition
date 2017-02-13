@@ -20,6 +20,10 @@
 	integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
 	crossorigin="anonymous"></script>
 
+<!-- ############ my style  -->
+<spring:url value="/resource/css/style.css" var="mystyle"/>
+<link  rel="stylesheet" href="${mystyle}" />
+
 <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
@@ -95,10 +99,10 @@
 
 							<li class="${current =='import' ? 'active' : '' }"><a
 								href='<spring:url value="/import.html"/>'>Import</a></li>
-								
+
 							<li class="${current =='learn' ? 'active' : '' }"><a
 								href='<spring:url value="/learn.html"/>'>Learn</a></li>
-								
+
 							<li class="${current =='review' ? 'active' : '' }"><a
 								href='<spring:url value="/review.html"/>'>Review</a></li>
 
@@ -135,11 +139,11 @@
 								${target_lang} <span class="caret"></span>
 						</a>
 							<ul class="dropdown-menu">
-								<li><a href='<spring:url value="/index/en.html"/>'>learn  <img
-										src='<spring:url value="/resource/img/en.png"/>' /> en
+								<li><a href='<spring:url value="/index/en.html"/>'>learn
+										<img src='<spring:url value="/resource/img/en.png"/>' /> en
 								</a></li>
-								<li><a href='<spring:url value="/index/fr.html"/>'>learn  <img
-										src='<spring:url value="/resource/img/fr.png"/>' /> fr
+								<li><a href='<spring:url value="/index/fr.html"/>'>learn
+										<img src='<spring:url value="/resource/img/fr.png"/>' /> fr
 								</a></li>
 							</ul></li>
 					</ul>

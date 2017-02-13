@@ -1,0 +1,13 @@
+.highlight {
+	background-color: yellow;
+}
+
+.word_new {
+	background-color: lightblue;
+}
+.word_unknown {
+	background-color: yellow;
+}
+.word_known {
+	background-color: #fff;
+}

@@ -31,7 +31,9 @@
 	</bean>
 
 	<!-- ******hibernate validator****** -->
-	<mvc:annotation-driven></mvc:annotation-driven>
+	<mvc:annotation-driven>
+
+	</mvc:annotation-driven>
 
 	<!-- ***** static resource **** -->
 	<mvc:resources location="/resource/**" mapping="/resource/" />
@@ -41,5 +43,20 @@
 		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
 		<property name="maxUploadSize" value="10000000" />
 		<property name="maxInMemorySize" value="10000000"></property>
+	</bean>
+
+
+	<!-- ②：启动Spring MVC的注解功能，完成请求和注解POJO的映射 -->
+	<bean
+		class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping">
+	</bean>
+	<bean
+		class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">
+		<property name="messageConverters">
+			<list>
+				<bean
+					class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter" />
+			</list>
+		</property>
 	</bean>
 </beans>
