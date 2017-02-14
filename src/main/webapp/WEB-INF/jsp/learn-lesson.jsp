@@ -18,22 +18,31 @@
 </div>
 
 <Script type="text/javascript">
+
+
 	$(document).ready(function() {
 		
-		
-		var list = ${words_new};
-		$.each(list, function( index, value ) {
+		// get list from database and mark the words
+		var listNew = ${jsonNew};
+		$.each(listNew, function( index, value ) {
 			//alert( index + ": " + value );
-			console.log(index + ": " + value );
+			//console.log(index + ": " + value );
 			markWord(value, 'word_new');
 		});
+		
+		var listKnown = ${jsonKnown};
+		$.each(listKnown, function( index, value ) {
+			//alert( index + ": " + value );
+			//console.log(index + ": " + value );
+			markWord(value, 'word_known');
+		});
 
-		
-		
-		markWord('the', 'word_known');
-		markWord('menu', 'word_unknown');
-		markWord('selection', 'word_new');
-		markWord('long', 'word_unknown');
+		var listUnknown = ${jsonUnknown};
+		$.each(listUnknown, function( index, value ) {
+			//alert( index + ": " + value );
+			//console.log(index + ": " + value );
+			markWord(value, 'word_unknown');
+		});
 		
 		
 	});
@@ -65,7 +74,7 @@
 			},
 			"className" : state,
 			"diacritics" : false,
-			"debug" : true
+			"debug" : false
 		});
 	}
 
@@ -110,7 +119,7 @@
 										// this.menu.innerHTML = 'Selection length: ' + this.selectedText.length;
 										var x = event.clientX, y = event.clientY, elementMouseIsOver = document
 												.elementFromPoint(x, y);
-										console.log(event);
+										//console.log(event);
 									},
 									debug : false
 								});
@@ -120,10 +129,6 @@
 
 	function doSave() {
 
-		/*
-		 * url,  parameters, 
-		
-		 */
 		$.getJSON("<c:url value='/learn/word/save/${lesson_id}.html'/>", //url
 		{
 			unknowns : 'apple'
@@ -132,6 +137,59 @@
 			alert(" response received :" + data);
 		});
 	}
+
+	
+	// send json data to spring mvc controller
+	
+function sendJson(){
+        // get words
+        var unknownSet = new Set();
+        var knownSet = new Set();
+        $('mark').each(function (i, obj){
+            //console.log("span : "+i);
+            //console.log(obj);
+            if($(obj).hasClass('word_unknown')){
+                unknownSet.add($(obj).text().toLowerCase());
+            }else{
+                knownSet.add($(obj).text().toLowerCase());
+            }
+        });
+        //console.log( " unknow size  = " + unknownSet.size);
+        var unknownArray = Array.from(unknownSet);
+        var knownArray = Array.from(knownSet);
+
+
+        $.ajax({
+            type: "POST",
+            contentType: "application/json",
+            url: "<c:url value='/learn/word/save/${lesson_id}.html'/>",
+            data: JSON.stringify({ "unknown" : unknownArray , "known" : knownArray  , "fresh":[] }),
+            dataType: 'json',
+            timeout: 600000,
+            success: function (data) {
+                //$("#btn-update").prop("disabled", false);
+
+            },
+            error: function (e) {
+               // $("#btn-save").prop("disabled", false);
+
+            }
+        });
+        
+        
+        // change state : new => known
+        $('mark').each(function (i, obj){
+            //console.log("span : "+i);
+            console.log(obj);
+            if($(obj).hasClass('word_new')){
+                unknownSet.add($(obj).text().toLowerCase());
+            	$(obj).removeClass("word_new word_known word_unknown");
+				$(obj).addClass("word_known");
+            }
+        });
+    }
+
+	
 </Script>
 
 <div class="container">
@@ -180,7 +238,7 @@
 							</c:choose>
 
 							<c:if test="${item2.genre == 'text'}">
-								<button onclick="doSave()">Save</button>
+								<button onclick="sendJson()">Save</button>
 								<button onclick="showSpan()">show span</button>
 							</c:if>
 						</div>

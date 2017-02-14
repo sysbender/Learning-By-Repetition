@@ -1,6 +1,7 @@
 package com.voxwalker.lbr.entity;
 
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -44,6 +45,10 @@ public class User {
 	
 	@OneToMany(mappedBy="user" , fetch=FetchType.LAZY, cascade=CascadeType.REMOVE) // by default, LAZY
 	private List<Course> courses;
+	
+	@OneToMany(mappedBy="user" , cascade=CascadeType.REMOVE) 
+	private Set<Word> words;
+	
 	
 
 	public String getName() {
