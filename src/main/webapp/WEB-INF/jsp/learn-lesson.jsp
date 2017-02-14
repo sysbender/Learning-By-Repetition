@@ -30,12 +30,12 @@
 			markWord(value, 'word_new');
 		});
 		
-		var listKnown = ${jsonKnown};
+/* 		var listKnown = ${jsonKnown};
 		$.each(listKnown, function( index, value ) {
 			//alert( index + ": " + value );
 			//console.log(index + ": " + value );
 			markWord(value, 'word_known');
-		});
+		}); */
 
 		var listUnknown = ${jsonUnknown};
 		$.each(listUnknown, function( index, value ) {
@@ -47,7 +47,7 @@
 		
 	});
 
-	function changeState(txt, state) {
+	function changeStateOld(txt, state) {
 		$('mark').each(
 				function(i, obj) {
 					if ($(obj).text() == txt) {
@@ -61,6 +61,22 @@
 					}
 				});
 	}
+	
+	function changeState(txt, state){
+        var found = false;
+        $('mark').each(function(i, obj){
+            if($(obj).text() == txt){
+                console.log(" found : "+ txt+ " , class = " + $(obj).attr('class'));
+                $(obj).removeClass("word_new word_known word_unknown");
+                $(obj).addClass(state);
+                found = true;
+            }
+        });
+        if(! found){
+            console.log("not found: " + txt + ", mark : " + state);
+            markWord(txt, state);
+        }
+    }
 
 	function markWord(txt, state) {
 
@@ -201,8 +217,8 @@ function sendJson(){
 			<ul class="nav nav-tabs">
 				<c:forEach varStatus="status" var="item1" items="${items}">
 
-					<li class="<c:if test="${status.first }">active</c:if>"><a
-						href="#${item1.genre} " data-toggle="tab"> ${item1.genre}</a></li>
+					<li class="<c:if test="${item1.genre =='text'}">active</c:if>"><a
+						href="#${item1.genre}" data-toggle="tab"> ${item1.genre}</a></li>
 
 				</c:forEach>
 			</ul>
@@ -212,7 +228,7 @@ function sendJson(){
 			<div class="tab-content">
 				<c:forEach var="item2" items="${items}">
 
-					<div class="tab-pane " id="${item2.genre}">
+					<div class="tab-pane <c:if test="${item2.genre == 'text'}">active</c:if>" id="${item2.genre}">
 
 						<div class="panel">
 							<div class="panel-heading">
