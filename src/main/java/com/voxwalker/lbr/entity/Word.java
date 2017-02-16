@@ -16,6 +16,7 @@ public class Word {
 	
 	private String txt;		
 	private int state; // 0 known, 1~ unknown	
+	private String lang;
 	
 	private Date addedDate;
 	private Date reviewedDate; 
@@ -73,6 +74,14 @@ public class Word {
 
 	public void setUser(User user) {
 		this.user = user;
+	}
+
+	public String getLang() {
+		return lang;
+	}
+
+	public void setLang(String lang) {
+		this.lang = lang;
 	}
 	
 

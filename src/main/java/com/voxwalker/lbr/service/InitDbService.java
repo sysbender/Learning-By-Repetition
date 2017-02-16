@@ -1,6 +1,7 @@
 package com.voxwalker.lbr.service;
 
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -140,6 +141,7 @@ public class InitDbService {
 		item2.setTxt("Senum: Hey, Brett, how are you? <br> Brett: Pretty good, how are you? <br> Senum: Good, thank you. <br> Brett: Hey, do you want to play a game? <br> Senum: Sure. What sort of game? <br> Brett: Let's play 20 questions. <br> Senum: OK, go ahead. <br> Brett: OK, who am I thinking about? <br> Senum: Man? Is it a male? <br> Brett: Yes, it's a male. <br> Senum: Is he an actor? <br> Brett: Yes, he's an actor. <br> Senum: Does he have short hair? <br> Brett: Yes, he has short hair. <br> Senum: Right. Is he famous? <br> Brett: Yes, he's famous. <br> Senum: Does he have blue eyes? <br> Brett: Yes. <br> Senum: He does have blue eyes? <br> Brett: No, he has... <br> Senum: He doesn't have blue eyes? <br> Brett: No, he doesn't have blue eyes. <br> Senum: Does he have brown eyes? <br> Brett: Yes.  <br> Senum: Is he short? <br> Brett: No. <br> Senum: Is he in the Ocean's 12? <br> Brett: Yes.  <br> Senum: He is! <br> Brett: Yes. <br> Senum: OK. Is he married, currently? <br> Brett: NO. <br> Senum: He isn't married? <br> Brett: No. <br> Senum: OK. Is he tall? <br> Brett: Yes. <br> Senum: OK. Is he George Clooney? <br> Brett: Yes. <br> Senum: Great. OK, my turn now. Who am I think about it?  <br> Brett: Is he a male? <br> Senum: Yes.  <br> Brett: Is he an actor? <br> Senum: No.  <br> Brett: Is he a singer? <br> Senum: No. <br> Brett: Is he a politician? <br> Senum: Yes.  <br> Brett: Does he have white hair? <br> Senum: Yes. <br> Brett: Yes. Is he American? <br> Senum: No. <br> Brett: Is he British? <br> Senum: No. <br> Brett: Is he Australian? <br> Senum: Yes.  <br> Brett: Is he your Prime Minister? <br> Senum: He is. <br> Brett: Is he John Howard? <br> Senum: Yes, he is. Well done. ");
 		item2.setAudioUrl("http://www.manythings.org/elllo/mp3/8.mp3");
 		itemRepository.save(item2);
+
 		String[] ws = { "a", "about", "all", "also", "and", "as", "at", "be",
 				"because", "but", "by", "can", "come", "could", "day", "do",
 				"even", "find", "first", "for", "from", "get", "give", "go",
@@ -157,22 +159,28 @@ public class InitDbService {
 		for (String w : ws) {
 			Word word = new Word();
 			word.setTxt(w);
-			if (w.length()<3) {
-				word.setState(0);  // known
+			if (w.length() < 3) {
+				word.setState(0); // known
 			} else {
-				word.setState(1);  // unknown
+				word.setState(1); // unknown
 			}
+
+			word.setLang("en");
+			word.setAddedDate(new Date());
+			word.setReviewedDate(new Date());
 			word.setUser(userAdmin);
 			wordRepository.save(word);
 		}
-		
-		
-		
-		List<String> wordKnown = wordRepository.findByUserWordKnown(userAdmin.getId());
-		System.out.println( " admin unknown words : " + Arrays.toString(wordKnown.toArray()));
-		
-		List<String> wordUnKnown = wordRepository.findByUserWordUnknown(userAdmin.getId());
-		System.out.println( " admin unknown words : " + Arrays.toString(wordUnKnown.toArray()));
+
+		List<String> wordKnown = wordRepository.findByUserAndLangWordKnown(
+				userAdmin.getId(), "en");
+		System.out.println(" admin unknown words : "
+				+ Arrays.toString(wordKnown.toArray()));
+
+		List<String> wordUnKnown = wordRepository.findByUserAndLangWordUnknown(
+				userAdmin.getId(), "en");
+		System.out.println(" admin unknown words : "
+				+ Arrays.toString(wordUnKnown.toArray()));
 
 	}
 

@@ -5,6 +5,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -50,7 +52,10 @@ public class LearnController {
 
 	@RequestMapping("/learn/lesson/{lesson_id}")
 	public String learnLesson(@PathVariable Long lesson_id, Model model,
-			Principal principal) {
+			Principal principal, HttpServletRequest request ) {
+		
+		// get lang
+		String lang = (String)request.getSession().getAttribute("target_lang");
 
 		// get user
 		String username = principal.getName();
@@ -75,10 +80,10 @@ public class LearnController {
 
 		// get unknown and known for user
 		Set<String> userKnownSet = wordService
-				.findByUserWordKnown(user.getId());
+				.findByUserAndLangWordKnown(user.getId(), lang);
 
-		Set<String> userUnknownSet = wordService.findByUserWordUnknown(user
-				.getId());
+		Set<String> userUnknownSet = wordService.findByUserAndLangWordUnknown(user
+				.getId(), lang);
 		Set<String> userAllSet = Sets.union(userKnownSet, userUnknownSet);
 
 		Set<String> wordKnownSet = Sets.intersection(wordAllSet, userKnownSet);
@@ -118,6 +123,9 @@ public class LearnController {
 	public String saveWords(@RequestBody WordSet wordSet,
 			@PathVariable Long lesson_id, Principal principal) {
 		User user = userService.findByName(principal.getName());
+		
+		Lesson lesson= lessonService.findOne(lesson_id);
+		String lang =  lesson.getCourse().getLang();
 		for(String word : wordSet.getUnknown()){
 			System.out.println( "**************  received unknown : " + word);
 		}
@@ -125,7 +133,7 @@ public class LearnController {
 			System.out.println( "**************  received unknown : " + word);
 		}
 		
-		wordService.save(user, wordSet);
+		wordService.save(user, lang,  wordSet);
 
 		return "";
 		 

@@ -23,6 +23,8 @@
 <!-- ############ my style  -->
 <spring:url value="/resource/css/style.css" var="mystyle"/>
 <link  rel="stylesheet" href="${mystyle}" />
+   
+    
 
 <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet"

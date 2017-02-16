@@ -24,6 +24,8 @@
 		<intercept-url pattern="/learn**" access="hasRole('ROLE_USER')" />
 		<intercept-url pattern="/learn/**" access="hasRole('ROLE_USER')" />
 		
+		<intercept-url pattern="/review**" access="hasRole('ROLE_USER')" />
+		<intercept-url pattern="/review/**" access="hasRole('ROLE_USER')" />		
 		
 		<!-- ** redirect to login page** -->
 		<form-login login-page="/login.html" />
