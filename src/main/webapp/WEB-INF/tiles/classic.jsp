@@ -106,7 +106,7 @@
 								href='<spring:url value="/learn.html"/>'>Learn</a></li>
 
 							<li class="${current =='review' ? 'active' : '' }"><a
-								href='<spring:url value="/review.html"/>'>Review</a></li>
+								href='<spring:url value="/review/1.html"/>'>Review</a></li>
 
 						</security:authorize>
 					</ul>

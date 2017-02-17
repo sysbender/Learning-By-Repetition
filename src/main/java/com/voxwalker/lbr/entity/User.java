@@ -12,6 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.Email;
@@ -19,6 +20,7 @@ import org.hibernate.validator.constraints.Email;
 import com.voxwalker.lbr.annotation.UniqueUsername;
 
 @Entity
+@Table(name="user")
 public class User {
 
 	@Id
@@ -40,7 +42,7 @@ public class User {
 	private boolean enabled;
 	
 	@ManyToMany
-	@JoinTable
+	@JoinTable(name="user_role")
 	private List<Role> roles;
 	
 	@OneToMany(mappedBy="user" , fetch=FetchType.LAZY, cascade=CascadeType.REMOVE) // by default, LAZY

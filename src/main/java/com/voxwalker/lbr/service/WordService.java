@@ -2,6 +2,7 @@ package com.voxwalker.lbr.service;
 
 import java.util.Date;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,13 +23,22 @@ public class WordService {
 	@Autowired
 	private WordRepository wordRepository;
 
-	public Set<String> findByUserAndLangWordKnown(Long id, String lang) {
+/*	public Set<String> findByUserAndLangWordKnown(Long id, String lang) {
 		return new HashSet<String>(wordRepository.findByUserAndLangWordKnown(id, lang));
 
 	}
 
 	public Set<String> findByUserAndLangWordUnknown(Long id, String lang) {
 		return new HashSet<String>(wordRepository.findByUserAndLangWordUnknown(id, lang));
+	}*/
+	
+	public Set<String> findByUserAndLangAndState(User user,   String lang, int state) {
+		List<Word> wordList = wordRepository.findByUserAndLangAndState(user, lang,state);
+		Set<String> strSet = new HashSet<String>();
+		for(Word word: wordList){
+			strSet.add(word.getTxt());
+		}
+		return strSet;
 	}
 
 	public void save(User user, String lang, WordSet wordSet) {
@@ -59,12 +69,20 @@ public class WordService {
 		 }
 	}
 
-	public Page<Word> getPage( int page_number) {
+/*	public Page<Word> getPage( int page_number) {
 		PageRequest pageRequest = new PageRequest(page_number -1 , PAGE_SIZE, Sort.Direction.DESC, "reviewedDate");
 		Page<Word> p;
 		 
 		//return wordRepository.findByUserAndLangAndState(user, lang, 1, pageRequest);
 		return wordRepository.findAll(pageRequest);
+	}*/
+	
+	public Page<Word> getPage(User user , String lang, int state, int page_number) {
+		PageRequest pageRequest = new PageRequest(page_number -1 , PAGE_SIZE, Sort.Direction.DESC, "reviewedDate");
+		//Page<Word> p;
+		 
+		return wordRepository.findByUserAndLangAndState(user, lang, state, pageRequest);
+		 
 	}
 
 

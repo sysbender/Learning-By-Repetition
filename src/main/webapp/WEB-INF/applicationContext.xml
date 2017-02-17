@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns:context="http://www.springframework.org/schema/context"
-	xmlns:jdbc="http://www.springframework.org/schema/jdbc"
-	xmlns:jpa="http://www.springframework.org/schema/data/jpa"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:jdbc="http://www.springframework.org/schema/jdbc" xmlns:jpa="http://www.springframework.org/schema/data/jpa"
 	xmlns:tx="http://www.springframework.org/schema/tx"
 	xsi:schemaLocation="http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-4.0.xsd
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
@@ -18,25 +16,6 @@
 	</context:component-scan>
 
 
-	<!-- ********** data source ******** -->
-	<jdbc:embedded-database id="dataSource" type="HSQL" />
-
-
-	<bean id="emf"
-		class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
-		<property name="packagesToScan" value="com.voxwalker.lbr.entity" />
-		<property name="dataSource" ref="dataSource" />
-		<property name="jpaProperties">
-			<props>
-				<prop key="hibernate.show_sql">true</prop>
-				<prop key="hibernate.hbm2ddl.auto">create</prop>
-			</props>
-		</property>
-		<property name="persistenceProvider">
-			<bean class="org.hibernate.jpa.HibernatePersistenceProvider"></bean>
-		</property>
-	</bean>
-
 
 	<!-- ****** transcation manager ***** -->
 	<tx:annotation-driven transaction-manager="transactionManager" />
@@ -45,11 +24,18 @@
 	<bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
 		<property name="dataSource" ref="dataSource" />
 	</bean>
-	
-	<!-- *******Data JPA***** -->	
-	<jpa:repositories base-package="com.voxwalker.lbr.repository"/>
-	
-	<!--  *******  include security.xml***** -->
-	<import resource="security.xml"/>
-	
+
+	<!-- *******Data JPA***** -->
+	<jpa:repositories base-package="com.voxwalker.lbr.repository" />
+
+	<!-- ******* include security.xml***** -->
+	<import resource="security.xml" />
+
+
+	<beans profile="dev">
+		<import resource="database-dev.xml" />
+	</beans>
+	<beans profile="prod">
+		<import resource="database-prod.xml" />
+	</beans>
 </beans>

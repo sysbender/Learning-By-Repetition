@@ -1,6 +1,7 @@
 package com.voxwalker.lbr.controller;
 
 import java.security.Principal;
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -20,6 +21,7 @@ import com.google.common.collect.Sets;
 import com.voxwalker.lbr.entity.Item;
 import com.voxwalker.lbr.entity.Lesson;
 import com.voxwalker.lbr.entity.User;
+import com.voxwalker.lbr.entity.Word;
 import com.voxwalker.lbr.model.WordSet;
 import com.voxwalker.lbr.service.ItemService;
 import com.voxwalker.lbr.service.LessonService;
@@ -52,18 +54,23 @@ public class LearnController {
 
 	@RequestMapping("/learn/lesson/{lesson_id}")
 	public String learnLesson(@PathVariable Long lesson_id, Model model,
-			Principal principal, HttpServletRequest request ) {
-		
-		// get lang
-		String lang = (String)request.getSession().getAttribute("target_lang");
+			Principal principal, HttpServletRequest request) {
+
+
 
 		// get user
 		String username = principal.getName();
 		User user = userService.findByName(username);
 
+		// get lesson
 		Lesson lesson = lessonService.findOne(lesson_id);
 		System.out.println(lesson_id + " = id;====================== name = "
 				+ lesson.getName());
+		
+		// get lang
+		//String lang = (String) request.getSession().getAttribute("target_lang");
+		String lang = lesson.getCourse().getLang();
+
 		List<Item> items = itemService.findByLesson(lesson);
 		System.out.println("====================item size =" + items.size());
 		// List<String> words_unknown = new ArrayList<String>();
@@ -79,11 +86,14 @@ public class LearnController {
 		}
 
 		// get unknown and known for user
-		Set<String> userKnownSet = wordService
-				.findByUserAndLangWordKnown(user.getId(), lang);
+		Set<String> userKnownSet = wordService.findByUserAndLangAndState(user,
+				lang, 0);
 
-		Set<String> userUnknownSet = wordService.findByUserAndLangWordUnknown(user
-				.getId(), lang);
+		Set<String> userUnknownSet = wordService.findByUserAndLangAndState(
+				user, lang, 1);
+		 System.out.println( "user known set : " + Arrays.toString(userKnownSet.toArray()));
+		 System.out.println( "user unknown set : " + Arrays.toString(userUnknownSet.toArray()));
+		// calculate sets
 		Set<String> userAllSet = Sets.union(userKnownSet, userUnknownSet);
 
 		Set<String> wordKnownSet = Sets.intersection(wordAllSet, userKnownSet);
@@ -123,20 +133,20 @@ public class LearnController {
 	public String saveWords(@RequestBody WordSet wordSet,
 			@PathVariable Long lesson_id, Principal principal) {
 		User user = userService.findByName(principal.getName());
-		
-		Lesson lesson= lessonService.findOne(lesson_id);
-		String lang =  lesson.getCourse().getLang();
-		for(String word : wordSet.getUnknown()){
-			System.out.println( "**************  received unknown : " + word);
+
+		Lesson lesson = lessonService.findOne(lesson_id);
+		String lang = lesson.getCourse().getLang();
+		for (String word : wordSet.getUnknown()) {
+			System.out.println("**************  received unknown : " + word);
 		}
-		for(String word : wordSet.getUnknown()){
-			System.out.println( "**************  received unknown : " + word);
+		for (String word : wordSet.getUnknown()) {
+			System.out.println("**************  received unknown : " + word);
 		}
-		
-		wordService.save(user, lang,  wordSet);
+
+		wordService.save(user, lang, wordSet);
 
 		return "";
-		 
+
 	}
 
 }

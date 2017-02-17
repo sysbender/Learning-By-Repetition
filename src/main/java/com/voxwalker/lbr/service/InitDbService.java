@@ -54,6 +54,7 @@ public class InitDbService {
 	// executed after dependency injection is done to perform any
 	// initialization.
 	public void init() {
+		if(roleRepository.findByName("ROLE_ADMIN") == null){
 
 		// add roles
 		Role roleUser = new Role();
@@ -80,6 +81,7 @@ public class InitDbService {
 		userGuest.setRoles(Arrays.asList(new Role[] { roleUser }));
 		userRepository.save(userGuest);
 
+	
 		// add courses
 
 		Course course = new Course();
@@ -95,8 +97,8 @@ public class InitDbService {
 		course2.setUser(userAdmin);
 		course2.setDesc("this is French course 2");
 		courseRepository.save(course2);
-
-		// add lessons
+		/*
+	// add lessons
 
 		Lesson lesson = new Lesson();
 		lesson.setCourse(course);
@@ -180,7 +182,8 @@ public class InitDbService {
 		List<String> wordUnKnown = wordRepository.findByUserAndLangWordUnknown(
 				userAdmin.getId(), "en");
 		System.out.println(" admin unknown words : "
-				+ Arrays.toString(wordUnKnown.toArray()));
+				+ Arrays.toString(wordUnKnown.toArray()));*/
+		}
 
 	}
 

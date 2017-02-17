@@ -7,11 +7,13 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 import org.hibernate.annotations.Type;
 import org.hibernate.validator.constraints.URL;
 
 @Entity
+@Table(name="item")
 public class Item {
 	
 	@Id
@@ -24,6 +26,7 @@ public class Item {
 	@Type(type="org.hibernate.type.StringClobType")
 	@Column(length = Integer.MAX_VALUE)
 	private String txt;
+	@Column(name="match1")
 	private boolean match; // if txt match audio
 	@URL
 	@Column(name="audio_url")

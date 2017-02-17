@@ -3,15 +3,18 @@ package com.voxwalker.lbr.entity;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import javax.validation.constraints.Size;
 
 @Entity
+@Table(name="course")
 public class Course {
 	@Id
 	@GeneratedValue
@@ -20,7 +23,7 @@ public class Course {
 	@Size(min=3, message="Name : min size 3")
 	private String name;
 	
-	
+	@Column(name="desc1")
 	private String desc;
 	
 	

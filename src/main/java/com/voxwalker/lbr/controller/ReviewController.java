@@ -1,6 +1,8 @@
 package com.voxwalker.lbr.controller;
 
 import java.security.Principal;
+import java.util.Arrays;
+import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -22,6 +24,7 @@ public class ReviewController {
 	@Autowired
 	private WordService wordService;
 	
+	
 	@Autowired
 	private UserService userService;
 	
@@ -34,7 +37,11 @@ public class ReviewController {
 		
 		
 		// search all unknown words sorted desc by review date 
-		Page<Word>  page= wordService.getPage(page_number); 
+		Set<String> wordSet = wordService.findByUserAndLangAndState(user, lang, 1);
+		System.out.println("user="+ user.getName() + "lang = " +lang +" unknown : " + Arrays.toString(wordSet.toArray()));
+		Page<Word>  page= wordService.getPage(user, lang, 1 , page_number); 
+		System.out.println("total in page: " + page.getTotalElements());
+		
 		int current = page.getNumber() + 1;
 		int begin = Math.max(1,  current -5 );
 		int end = Math.min(begin +10,page.getTotalPages());

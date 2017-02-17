@@ -3,7 +3,7 @@ package com.voxwalker.lbr.repository;
 import java.util.List;
 
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -19,6 +19,8 @@ public interface WordRepository extends JpaRepository<Word, Long> {
 	List<String> findByUserAndLangWordUnknown(@Param("user_id") Long user_id , @Param("lang") String lang);
 
 	Word findByUserAndTxt(User user, String txt);
+	List<Word> findByUserAndLangAndState(User user, String lang, int state);
+	Page<Word> findByUserAndLangAndState(User user, String lang, int state, Pageable page );
 
 	
 	
