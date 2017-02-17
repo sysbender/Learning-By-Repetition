@@ -20,7 +20,7 @@
 
 			<tr>
 				<td>${course.name }</td>
-				<td>${course.desc }</td>
+				<td>${course.description }</td>
 				<td>${course.lang }</td>
 			</tr>
 

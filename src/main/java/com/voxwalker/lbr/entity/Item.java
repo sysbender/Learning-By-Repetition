@@ -26,8 +26,8 @@ public class Item {
 	@Type(type="org.hibernate.type.StringClobType")
 	@Column(length = Integer.MAX_VALUE)
 	private String txt;
-	@Column(name="match1")
-	private boolean match; // if txt match audio
+	@Column(name="matching")
+	private boolean matching; // if txt match audio
 	@URL
 	@Column(name="audio_url")
 	private String audioUrl;
@@ -72,12 +72,13 @@ public class Item {
 		this.txt = txt;
 	}
 
-	public boolean isMatch() {
-		return match;
+
+	public boolean isMatching() {
+		return matching;
 	}
 
-	public void setMatch(boolean match) {
-		this.match = match;
+	public void setMatching(boolean matching) {
+		this.matching = matching;
 	}
 
 	public String getAudioUrl() {

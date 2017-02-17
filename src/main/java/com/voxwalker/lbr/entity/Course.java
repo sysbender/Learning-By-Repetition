@@ -23,8 +23,8 @@ public class Course {
 	@Size(min=3, message="Name : min size 3")
 	private String name;
 	
-	@Column(name="desc1")
-	private String desc;
+	@Column(name="description")
+	private String description;
 	
 	
 	private String lang;
@@ -66,11 +66,12 @@ public class Course {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public String getDesc() {
-		return desc;
+
+	public String getDescription() {
+		return description;
 	}
-	public void setDesc(String desc) {
-		this.desc = desc;
+	public void setDescription(String description) {
+		this.description = description;
 	}
 	public String getLang() {
 		return lang;

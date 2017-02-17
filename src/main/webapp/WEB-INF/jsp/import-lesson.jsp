@@ -72,8 +72,13 @@
 
 
 <!-- *******************items **************************** -->
-<h2>items list:</h2>
-
+<!-- <h2>items list:</h2> -->
+  <ol class="breadcrumb">
+    <li><a href='<spring:url value="/import.html"/>'>Import</a></li>
+    <li><a href='<spring:url value="/import/course/${course.id}.html"/>'>Course ("${course.name}")</a></li>
+    <li class="active">Lesson ( "${lesson.name}" )</li>        
+  </ol>
+  
 <!-- Button trigger modal -->
 <button type="button" class="btn btn-primary btn-lg" data-toggle="modal"
 	data-target="#myItemModal">New Item</button>
@@ -120,9 +125,14 @@
 					<div class="form-group">
 						<label for="lang" class="col-sm-2 control-label">language:</label>
 						<div class="col-sm-10">
-							<form:input path="lang" />
-							<label>match: </label>
-							<form:checkbox path="match" />
+					 
+							<form:radiobutton path="lang" value="en" />
+							Engish
+							<form:radiobutton path="lang" value="fr" />
+							French
+							
+							<label>matching: </label>
+							<form:checkbox path="matching" />
 						</div>
 					</div>
 

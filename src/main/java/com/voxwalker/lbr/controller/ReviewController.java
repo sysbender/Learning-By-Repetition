@@ -2,6 +2,7 @@ package com.voxwalker.lbr.controller;
 
 import java.security.Principal;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
@@ -15,11 +16,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.voxwalker.lbr.entity.User;
 import com.voxwalker.lbr.entity.Word;
+import com.voxwalker.lbr.repository.WordRepository;
 import com.voxwalker.lbr.service.UserService;
 import com.voxwalker.lbr.service.WordService;
 
 @Controller
 public class ReviewController {
+	
+	@Autowired
+	private WordRepository wordRepository;
 	
 	@Autowired
 	private WordService wordService;
@@ -30,6 +35,14 @@ public class ReviewController {
 	
 	@RequestMapping("/review/{page_number}")
 	public String review( @PathVariable int page_number , Model model, HttpServletRequest request, Principal principal){
+		
+		
+		List<Word> allwords = wordRepository.findAll();
+		for(Word w : allwords){
+			System.out.println(w.getUser().getName() + w.getLang()+w.getState()+" ############## : " + w.getTxt() );
+		}
+		
+		
 		
 		User user = userService.findByName(principal.getName());
 		// get lang

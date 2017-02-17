@@ -2,6 +2,8 @@ package com.voxwalker.lbr.service;
 
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,6 +13,7 @@ import com.voxwalker.lbr.repository.CourseRepository;
 import com.voxwalker.lbr.repository.LessonRepository;
 
 @Service
+@Transactional
 public class LessonService {
 	@Autowired
 	private LessonRepository lessonRepository;
@@ -38,6 +41,12 @@ public class LessonService {
 		 lesson.setCourse(course);
 		 lessonRepository.save(lesson);
 		
+	}
+
+
+
+	public Course findCourseByLesson(Lesson lesson) {		
+		return  lesson.getCourse();
 	}
 
 }

@@ -43,6 +43,12 @@
 
 <%-- <h2>lessons of ${course.name}</h2> --%>
 
+
+  <ol class="breadcrumb">
+    <li><a href='<spring:url value="/import.html"/>'>Import</a></li>
+    <li class="active">Course ("${course.name}")</li>        
+  </ol>
+  
 <!-- Button trigger modal -->
 <button type="button" class="btn btn-primary btn-lg" data-toggle="modal"
 	data-target="#myModal">New Lesson</button>

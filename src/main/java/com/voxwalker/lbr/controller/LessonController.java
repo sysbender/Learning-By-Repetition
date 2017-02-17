@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.voxwalker.lbr.entity.Course;
 import com.voxwalker.lbr.entity.Item;
 import com.voxwalker.lbr.entity.Lesson;
 import com.voxwalker.lbr.entity.Upload;
@@ -56,11 +57,14 @@ public class LessonController {
 	public String lesson(@PathVariable Long lesson_id, Model model) {
 
 		Lesson lesson = lessonService.findOne(lesson_id);
+		Course course = lessonService.findCourseByLesson(lesson);
 		System.out.println(lesson_id + " = id;====================== name = "
 				+ lesson.getName());
 		List<Upload> uploads = uploadService.findByLesson(lesson);
 		List<Item> items = itemService.findByLesson(lesson);
 		System.out.println("====================item size =" + items.size() +"upload size:" + uploads.size());
+		model.addAttribute("course",course);
+		model.addAttribute("lesson",lesson);
 		model.addAttribute("items", items);
 		model.addAttribute("uploads", uploads);
 		return "import-lesson";

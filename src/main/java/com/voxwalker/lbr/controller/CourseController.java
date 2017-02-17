@@ -41,6 +41,7 @@ public class CourseController {
 		
 		// toDo: change repository to service
 		Course course = courseService.findOne(course_id);
+		model.addAttribute("course",course);
 		model.addAttribute("lessons",lessonService.findByCourse(course));
 		return "import-course";
 	}

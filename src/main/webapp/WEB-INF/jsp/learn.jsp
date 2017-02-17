@@ -24,11 +24,10 @@
 		<c:forEach var="course" items="${user.courses }">
 
 			<tr>
-				<td><a
-					href="<spring:url value='/import/course/${course.id}.html'/>">${course.name }</a>
+				<td>${course.name }</a>
 				</td>
 				<td><c:out value="${course.lang}" /></td>
-				<td><c:out value="${course.desc}" /></td>
+				<td><c:out value="${course.description}" /></td>
 				<td><c:forEach var="lesson" items="${course.lessons}">
 						<a href='<c:url value="/learn/lesson/${lesson.id}.html"></c:url>'>
 							${lesson.name}</a>

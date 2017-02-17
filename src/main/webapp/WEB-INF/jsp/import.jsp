@@ -39,7 +39,11 @@
 </Script>
 
 
-<h2>imports of ${user.name}</h2>
+  <ol class="breadcrumb">
+    <li><a href='<spring:url value="/import.html"/>'>Import</a></li>
+    <li class="active">Course</li>        
+  </ol>
+  
 
 <!-- Button trigger modal -->
 <button type="button" class="btn btn-primary btn-lg" data-toggle="modal"
@@ -89,9 +93,9 @@
 					</div>
 
 					<div class="form-group">
-						<label for="desc" class="col-sm-2 control-label" >description:</label>
+						<label for="description" class="col-sm-2 control-label" >description:</label>
 						<div class="col-sm-10">
-							<form:textarea path="desc" cssClass="form-control" />
+							<form:textarea path="description" cssClass="form-control" />
 						</div>
 					</div>
 
@@ -126,7 +130,7 @@
 				<td><a href="<spring:url value='/import/course/${course.id}.html'/>">${course.name }</a>
 					</td>
 				<td>${course.lang }</td>
-				<td>${course.desc }</td>
+				<td>${course.description }</td>
 
 				<td><c:forEach var="lesson" items="${course.lessons}">
 				${lesson.name} </c:forEach></td>

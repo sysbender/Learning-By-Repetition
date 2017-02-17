@@ -86,16 +86,16 @@ public class InitDbService {
 
 		Course course = new Course();
 		course.setName("English Course 1");
-		course.setLang("En");
+		course.setLang("en");
 		course.setUser(userAdmin);
-		course.setDesc("this is english course 1");
+		course.setDescription("this is english course 1");
 		courseRepository.save(course);
 
 		Course course2 = new Course();
 		course2.setName("French Course 2");
-		course2.setLang("Fr");
+		course2.setLang("fr");
 		course2.setUser(userAdmin);
-		course2.setDesc("this is French course 2");
+		course2.setDescription("this is French course 2");
 		courseRepository.save(course2);
 		/*
 	// add lessons
