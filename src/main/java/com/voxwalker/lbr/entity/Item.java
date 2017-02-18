@@ -13,7 +13,7 @@ import org.hibernate.annotations.Type;
 import org.hibernate.validator.constraints.URL;
 
 @Entity
-@Table(name="item")
+@Table(name="t_item")
 public class Item {
 	
 	@Id

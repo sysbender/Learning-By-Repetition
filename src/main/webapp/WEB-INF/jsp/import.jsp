@@ -93,9 +93,9 @@
 					</div>
 
 					<div class="form-group">
-						<label for="description" class="col-sm-2 control-label" >description:</label>
+						<label for="desc" class="col-sm-2 control-label" >description:</label>
 						<div class="col-sm-10">
-							<form:textarea path="description" cssClass="form-control" />
+							<form:textarea path="desc" cssClass="form-control" />
 						</div>
 					</div>
 
@@ -129,8 +129,8 @@
 			<tr>
 				<td><a href="<spring:url value='/import/course/${course.id}.html'/>">${course.name }</a>
 					</td>
-				<td>${course.lang }</td>
-				<td>${course.description }</td>
+				<td>${course.lang}</td>
+				<td>${course.desc}</td>
 
 				<td><c:forEach var="lesson" items="${course.lessons}">
 				${lesson.name} </c:forEach></td>

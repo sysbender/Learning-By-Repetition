@@ -132,7 +132,7 @@
 							French
 							
 							<label>matching: </label>
-							<form:checkbox path="matching" />
+							<form:checkbox path="matching"  value="1"/>
 						</div>
 					</div>
 

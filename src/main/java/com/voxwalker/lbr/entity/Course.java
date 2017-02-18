@@ -14,7 +14,7 @@ import javax.persistence.Table;
 import javax.validation.constraints.Size;
 
 @Entity
-@Table(name="course")
+@Table(name="t_course")
 public class Course {
 	@Id
 	@GeneratedValue
@@ -24,10 +24,11 @@ public class Course {
 	private String name;
 	
 	@Column(name="description")
-	private String description;
+	private String desc;
 	
 	
 	private String lang;
+	@Column(name="shared")
 	private int share; // 0-private, 1-public
 	
 	@ManyToOne
@@ -67,11 +68,12 @@ public class Course {
 		this.name = name;
 	}
 
-	public String getDescription() {
-		return description;
+
+	public String getDesc() {
+		return desc;
 	}
-	public void setDescription(String description) {
-		this.description = description;
+	public void setDesc(String desc) {
+		this.desc = desc;
 	}
 	public String getLang() {
 		return lang;

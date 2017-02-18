@@ -16,7 +16,7 @@ import org.hibernate.validator.constraints.URL;
 
 
 @Entity
-@Table(name="lesson")
+@Table(name="t_lesson")
 public class Lesson {
 	@Id
 	@GeneratedValue

@@ -1,5 +1,6 @@
 package com.voxwalker.lbr.entity;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -8,14 +9,16 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="upload")
+@Table(name="t_upload")
 public class Upload {
 	@Id
 	@GeneratedValue
 	private Long id;
 	private String name;
+	@Column(name="filepath")
 	private String file;
 	private String url;
+	@Column(name="filesize")
 	private long size;
 	
 	@ManyToOne

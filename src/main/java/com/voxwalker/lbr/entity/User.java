@@ -20,7 +20,7 @@ import org.hibernate.validator.constraints.Email;
 import com.voxwalker.lbr.annotation.UniqueUsername;
 
 @Entity
-@Table(name="user")
+@Table(name="t_user")
 public class User {
 
 	@Id
@@ -42,7 +42,7 @@ public class User {
 	private boolean enabled;
 	
 	@ManyToMany
-	@JoinTable(name="user_role")
+	@JoinTable(name="t_user_role")
 	private List<Role> roles;
 	
 	@OneToMany(mappedBy="user" , fetch=FetchType.LAZY, cascade=CascadeType.REMOVE) // by default, LAZY
