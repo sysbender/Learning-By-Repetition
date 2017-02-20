@@ -8,6 +8,10 @@ import java.util.Set;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,6 +24,7 @@ import com.voxwalker.lbr.repository.WordRepository;
 import com.voxwalker.lbr.service.UserService;
 import com.voxwalker.lbr.service.WordService;
 
+@PropertySource("classpath:config.properties")
 @Controller
 public class ReviewController {
 	
@@ -33,6 +38,18 @@ public class ReviewController {
 	@Autowired
 	private UserService userService;
 	
+
+	 @Bean
+	    public static PropertySourcesPlaceholderConfigurer propertySourcesPlaceholderConfigurer() {
+	        return new PropertySourcesPlaceholderConfigurer();
+	    }
+	 
+	@Value("${tts.url.en}")
+	private String ttsUrlEn;
+	
+	@Value("${tts.url.fr}")
+	private String ttsUrlFr;
+	
 	@RequestMapping("/review/{page_number}")
 	public String review( @PathVariable int page_number , Model model, HttpServletRequest request, Principal principal){
 		
@@ -45,9 +62,15 @@ public class ReviewController {
 		
 		
 		User user = userService.findByName(principal.getName());
-		// get lang
+		// get lang and tts service url 
+		String ttsUrl="#";
 		String lang = (String)request.getSession().getAttribute("target_lang");
-		
+		if(lang.equalsIgnoreCase("fr")){
+			ttsUrl = ttsUrlFr;
+		}else{
+			ttsUrl = ttsUrlEn;
+		}
+		System.out.println( "====================== ttsUrl =" + ttsUrl);
 		
 		// search all unknown words sorted desc by review date 
 		Set<String> wordSet = wordService.findByUserAndLangAndState(user, lang, 1);
@@ -63,6 +86,7 @@ public class ReviewController {
 		model.addAttribute("beginIndex", begin);
 		model.addAttribute("endIndex", end);
 		model.addAttribute("currentIndex", current);
+		model.addAttribute("ttsUrl", ttsUrl);
 
 		// show pagination,  10 words per page
 		return "review";

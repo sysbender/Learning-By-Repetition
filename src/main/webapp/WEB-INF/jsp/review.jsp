@@ -86,8 +86,8 @@ $(document).ready(function(){
 			<tr>
 				<td>${word.txt}</td>
 				<td> 
-				<span class="glyphicon glyphicon-play-circle play_tts"  
-				href="<spring:url value="http://localhost:8000/GetAudioStream?s=${word.txt}"/>"></span>
+				<span style="font-size:2em;" class="glyphicon glyphicon-play-circle play_tts"  
+				href="<spring:url value="${ttsUrl}${word.txt}"/>"></span>
 				 
 			</tr>
 		</c:forEach>

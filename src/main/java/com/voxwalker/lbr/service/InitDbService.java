@@ -97,21 +97,17 @@ public class InitDbService {
 		course2.setUser(userAdmin);
 		course2.setDesc("this is French course 2");
 		courseRepository.save(course2);
-		/*
+
 	// add lessons
 
 		Lesson lesson = new Lesson();
 		lesson.setCourse(course);
 		lesson.setName("english lesson 01");
-		// lesson.setText1("long time ago, there is a hill. on the hill, there is a temple, in the temple, there is a monk.");
-		// lesson.setAudio1("http://traffic.libsyn.com/blogrelations/Match20in20the20sky.mp3");
 		lessonRepository.save(lesson);
 
 		Lesson lesson2 = new Lesson();
 		lesson2.setCourse(course2);
 		lesson2.setName("french lesson 01");
-		// lesson2.setText1("Il était une fois une maman cochon qui avait trois petits cochons. Elle les aimait beaucoup, mais comme il n'y avait pas assez de nourriture pour qu'ils puissent tous manger à leur faim, elle les a envoyé tenter leur chance dans le vaste monde.");
-		// lesson2.setAudio1("http://www.thefrenchexperiment.com/audio/threepigs/threepigs1.mp3");
 		lessonRepository.save(lesson2);
 
 		Upload upload = new Upload();
@@ -161,7 +157,7 @@ public class InitDbService {
 		for (String w : ws) {
 			Word word = new Word();
 			word.setTxt(w);
-			if (w.length() < 3) {
+			if (w.length() < 4) {
 				word.setState(0); // known
 			} else {
 				word.setState(1); // unknown
@@ -182,7 +178,7 @@ public class InitDbService {
 		List<String> wordUnKnown = wordRepository.findByUserAndLangWordUnknown(
 				userAdmin.getId(), "en");
 		System.out.println(" admin unknown words : "
-				+ Arrays.toString(wordUnKnown.toArray()));*/
+				+ Arrays.toString(wordUnKnown.toArray()));
 		}
 
 	}

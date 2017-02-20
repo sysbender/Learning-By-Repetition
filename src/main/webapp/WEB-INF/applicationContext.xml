@@ -32,13 +32,14 @@
 	<import resource="security.xml" />
 
 
+
 	<beans profile="hsql">
 		<import resource="database-hsql.xml" />
 	</beans>
 	<beans profile="mysql">
 		<import resource="database-mysql.xml" />
 	</beans>
-		<beans profile="oracle">
+	<beans profile="oracle">
 		<import resource="database-oracle.xml" />
 	</beans>
 </beans>
