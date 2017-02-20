@@ -254,8 +254,7 @@ function sendJson(){
 							</c:choose>
 
 							<c:if test="${item2.genre == 'text'}">
-								<button onclick="sendJson()">Save</button>
-								<button onclick="showSpan()">show span</button>
+								<button onclick="sendJson()">Save</button>								
 							</c:if>
 						</div>
 
