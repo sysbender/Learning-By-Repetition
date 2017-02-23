@@ -102,8 +102,6 @@
 	<thead>
 		<tr>
 			<th>Lesson name</th>
-			<th>Lesson Items</th>
-			<th>Lesson Uploads</th>
 			<th>remove</th>
 		</tr>
 	</thead>
@@ -114,10 +112,6 @@
 			<tr>
 				<td><a href="<spring:url value='/import/lesson/${lesson.id}.html'/>">${lesson.name }</a>
 					</td>
-				<td> </td>
-				<td> </td>
- 
-
 				<td><a
 					href='<spring:url value="/import/lesson/remove/${lesson.id}.html" />'
 					class="btn btn-danger triggerRemove"> remove course:

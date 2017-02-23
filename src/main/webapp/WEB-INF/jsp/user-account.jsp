@@ -3,31 +3,33 @@
 
 <%@ include file="../tiles/taglib.jsp"%>
 
-<h2>imports of ${user.name}</h2>
-
+<h2>statistics of ${enSummary.user.name}</h2>
 
 <table class="table table-bordered">
 	<thead>
 		<tr>
-			<th>course name</th>
-			<th>course description</th>
-			<th>course language</th>
+			<th>language</th>
+			<th>imported courses</th>
+			<th>imported lessons</th>
+			<th>known words</th>
+			<th>unknown words</th>
 		</tr>
 	</thead>
 
 	<tbody>
-		<c:forEach var="course" items="${user.courses }">
-
-			<tr>
-				<td>${course.name }</td>
-				<td>${course.desc }</td>
-				<td>${course.lang }</td>
-			</tr>
-
-		</c:forEach>
-
-
+		<tr>
+			<td>${enSummary.lang}</td>
+			<td>${enSummary.countCourse}</td>
+			<td>${enSummary.countLesson}</td>
+			<td>${enSummary.countWordKnown}</td>
+			<td>${enSummary.countWordUnknown}</td>
+		</tr>
+		<tr>
+			<td>${frSummary.lang}</td>
+			<td>${frSummary.countCourse}</td>
+			<td>${frSummary.countLesson}</td>
+			<td>${frSummary.countWordKnown}</td>
+			<td>${frSummary.countWordUnknown}</td>
+		</tr>
 	</tbody>
-
 </table>
-

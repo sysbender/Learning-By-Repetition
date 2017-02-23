@@ -22,6 +22,10 @@ public interface WordRepository extends JpaRepository<Word, Long> {
 	List<Word> findByUserAndLangAndState(User user, String lang, int state);
 	Page<Word> findByUserAndLangAndState(User user, String lang, int state, Pageable page );
 
+	int countByUserAndLangAndState(User user, String lang, int state);
+
+
+
 	
 	
 	

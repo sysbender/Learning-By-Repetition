@@ -12,9 +12,12 @@ import org.springframework.stereotype.Service;
 import com.voxwalker.lbr.entity.Course;
 import com.voxwalker.lbr.entity.Role;
 import com.voxwalker.lbr.entity.User;
+import com.voxwalker.lbr.model.UserSummary;
 import com.voxwalker.lbr.repository.CourseRepository;
+import com.voxwalker.lbr.repository.LessonRepository;
 import com.voxwalker.lbr.repository.RoleRepository;
 import com.voxwalker.lbr.repository.UserRepository;
+import com.voxwalker.lbr.repository.WordRepository;
 
 @Service
 @Transactional
@@ -31,6 +34,14 @@ public class UserService {
 	
 	@Autowired
 	private CourseService courseService;
+	
+	@Autowired
+	private WordRepository wordRepository;
+	
+	@Autowired
+	private LessonRepository lessonRepository;
+	
+	
 
 	public List<User> findAll() {
 		return userRepository.findAll();
@@ -80,6 +91,23 @@ public class UserService {
 	public User findByName(String username) {
 
 		return userRepository.findByName(username);
+	}
+
+	public UserSummary getUserSummary(User user, String lang) {
+		UserSummary summary = new UserSummary();
+		summary.setUser(user);
+		summary.setLang(lang);
+		summary.setCountCourse(courseRepository.countByUserAndLang(user, lang));
+		//count lesson
+		List<Course> courses = courseRepository.findByUserAndLang(user,lang);
+		int countLesson = 0;
+		for(Course course : courses){
+			countLesson += lessonRepository.countByCourse(course);
+		}
+		summary.setCountLesson(countLesson);
+		summary.setCountWordKnown(wordRepository.countByUserAndLangAndState(user,lang,0));
+		summary.setCountWordUnknown(wordRepository.countByUserAndLangAndState(user,lang,1));
+		return summary;
 	}
 
 }

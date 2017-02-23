@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.voxwalker.lbr.entity.Course;
+import com.voxwalker.lbr.entity.User;
+import com.voxwalker.lbr.model.UserSummary;
 import com.voxwalker.lbr.service.CourseService;
 import com.voxwalker.lbr.service.UserService;
 
@@ -38,9 +40,17 @@ public class UserController {
 	
 	
 	@RequestMapping("/account")
-	public String account(Model model, Principal principal) {
+	public String account(Model model, Principal principal) {	
+		
 		String name = principal.getName();
-		model.addAttribute("user", userService.findOneWithCourses(name));
+		User user = userService.findByName(name);
+		//
+		UserSummary enSummary = userService.getUserSummary(user, "en");
+		UserSummary frSummary = userService.getUserSummary(user, "fr");
+		
+		model.addAttribute("enSummary", enSummary);
+		model.addAttribute("frSummary", frSummary);	
+		
 		return "account";
 	}
 

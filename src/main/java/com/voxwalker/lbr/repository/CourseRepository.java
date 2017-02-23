@@ -11,4 +11,8 @@ public interface CourseRepository extends JpaRepository<Course, Long> {
 
 		List<Course> findByUser(User user);
 
+		int countByUserAndLang(User user, String lang);
+
+		List<Course> findByUserAndLang(User user, String lang);
+
 }
